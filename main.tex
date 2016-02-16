@@ -1,0 +1,111 @@
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{lmodern}
+%\usepackage{circuitikz}
+\usepackage{color}
+\usepackage{wrapfig}
+\usepackage{placeins}
+\usepackage{subfigure}
+\usepackage{tabu}
+\usepackage{fullpage}
+\usepackage[squaren]{SIunits}
+\usepackage{graphicx}
+%\usepackage[pdftex]{graphicx}
+\usepackage{epstopdf}
+\usepackage{epsfig}
+\usepackage{hyperref}
+\usepackage{tikz}
+\usepackage{tikz-qtree}
+\usepackage{eurosym}
+%\usepackage{chemist}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{mathrsfs}
+\usepackage{dsfont}% use $\mathds{1}$
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\red}{\textcolor{red}}
+\newcommand{\dis}{\displaystyle}
+\newcommand{\dr}{\partial}
+\newcommand{\txt}{\text}
+\newcommand{\td}{\todo[inline]}
+\newcommand{\ttt}{\texttt}
+\newcommand{\itt}{\textit}
+
+\usepackage{algorithm}
+\usepackage{todonotes}
+\usepackage[noend]{algpseudocode}
+
+%\newtheorem{theoreme}			     {Théorème}	[chapter]
+%\newtheorem{proposition}[theoreme]	 {Proposition}	
+%\newtheorem{corollaire}	  [theoreme]	 {Corollaire}	
+%\newtheorem{lemme}	      [theoreme]  {Lemme}		
+%\newtheorem{definition}	         {Définition}[chapter]
+%\theoremstyle{definition}
+%\newtheorem{exemple}			     {Exemple}	[chapter]
+%\newtheorem{contreexemple}[exemple]{Contre-exemple}
+%\newtheorem{probleme}	             {Probl\`eme}[chapter]
+
+\usepackage{listings}
+\usepackage{textcomp}
+\definecolor{listinggray}{gray}{0.9}
+\definecolor{lbcolor}{rgb}{0.9,0.9,0.9}
+\lstset{
+	backgroundcolor=\color{lbcolor},
+	tabsize=4,
+	rulecolor=,
+	language=matlab,
+        basicstyle=\scriptsize,
+        upquote=true,
+        aboveskip={1.5\baselineskip},
+        columns=fixed,
+        showstringspaces=false,
+        extendedchars=true,
+        breaklines=true,
+        prebreak = \raisebox{0ex}[0ex][0ex]{\ensuremath{\hookleftarrow}},
+        frame=single,
+        showtabs=false,
+        showspaces=false,
+        showstringspaces=false,
+        identifierstyle=\ttfamily,
+        keywordstyle=\color[rgb]{0,0,1},
+        commentstyle=\color[rgb]{0.133,0.545,0.133},
+        stringstyle=\color[rgb]{0.627,0.126,0.941},
+}
+
+\DeclareMathOperator{\e}{e}
+
+\title{Titre}
+\author{David Weicker}
+\date{\today}
+
+\begin{document}
+\tabulinesep=1.2mm
+\begin{center}
+\hrule
+\begin{tabular}{c}
+\\[0.005cm]
+\Large{Insert Title Here}\\[0.3cm] %THIS IS THE TITLE
+\textsc{NAME1} name1  \& \textsc{NAME2} name2\\[0.2cm]
+$\text{6}^{\text{th}}$ November 2015\\[0.2cm] %THIS IS THE DATE
+\end{tabular}
+\hrule
+\end{center}
+
+\section{Model 1}
+\input{mod1.tex}
+
+\section{Model 2}
+\input{mod2.tex}
+
+\section{Model 3}
+\input{mod3.tex}
+
+
+
+\end{document}
