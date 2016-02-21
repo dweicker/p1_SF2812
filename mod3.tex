@@ -1,1 +1,11 @@
-bloblo
+\subsection{Presentation of the problem}
+In this section, we are going to generalize the model a little bit. Up to this point, we have considered that each link has a known capacity and that this quantity is exact. This is, however, not true in general. We can expect the actual capacities to be close to the numbers given but we should take into account that they can fluctuate around those values. Our new model will thus have to deal with this uncertainty. Because the value of the capacities can be considered as an unknown parameter, we will use stochastic programming.
+
+We also know that the 50 Gbit/s-demand can be rerouted after the actual values are known but the 40 Gbit/s-demand must be determined on beforehand (and thus not cannot be rerouted after knowing the actual capacities).
+
+\subsection{Mathematical model}
+Just as in the previous models, we introduce the set $I$ :
+$$I = \{ Sto,Lon,Ber,War,Par,Rom,Mad\}$$
+
+
+ 

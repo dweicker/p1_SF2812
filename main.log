@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014) (preloaded format=pdflatex 2014.10.4)  16 FEB 2016 20:21
+This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014) (preloaded format=pdflatex 2014.10.4)  21 FEB 2016 15:24
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -991,7 +991,15 @@ File: tikzlibrarytopaths.code.tex 2008/06/17 v3.0.0 (rcs-revision 1.2)
 \child@list=\toks35
 \root@node=\toks36
 ))
-(/usr/local/texlive/2014/texmf-dist/tex/latex/eurosym/eurosym.sty
+(/usr/local/texlive/2014/texmf-dist/tex/generic/pgf/frontendlayer/tikz/librarie
+s/tikzlibraryarrows.code.tex
+File: tikzlibraryarrows.code.tex 2008/01/09 v3.0.0 (rcs-revision 1.1)
+
+(/usr/local/texlive/2014/texmf-dist/tex/generic/pgf/libraries/pgflibraryarrows.
+code.tex
+File: pgflibraryarrows.code.tex 2013/09/23 v3.0.0 (rcs-revision 1.16)
+\arrowsize=\dimen197
+)) (/usr/local/texlive/2014/texmf-dist/tex/latex/eurosym/eurosym.sty
 Package: eurosym 1998/08/06 v1.1 European currency symbol ``Euro''
 \@eurobox=\box44
 )
@@ -1002,7 +1010,7 @@ Package: amsmath 2013/01/14 v2.14 AMS math features
 For additional information on amsmath, use the `?' option.
 (/usr/local/texlive/2014/texmf-dist/tex/latex/amsmath/amsbsy.sty
 Package: amsbsy 1999/11/29 v1.2d
-\pmbraise@=\dimen197
+\pmbraise@=\dimen198
 )
 (/usr/local/texlive/2014/texmf-dist/tex/latex/amsmath/amsopn.sty
 Package: amsopn 1999/12/14 v2.01 operator names
@@ -1019,7 +1027,7 @@ LaTeX Info: Redefining \dots on input line 381.
 LaTeX Info: Redefining \cdots on input line 466.
 \Mathstrutbox@=\box45
 \strutbox@=\box46
-\big@size=\dimen198
+\big@size=\dimen199
 LaTeX Font Info:    Redeclaring font encoding OML on input line 566.
 LaTeX Font Info:    Redeclaring font encoding OMS on input line 567.
 \macc@depth=\count138
@@ -1032,12 +1040,12 @@ LaTeX Font Info:    Redeclaring font encoding OMS on input line 567.
 \column@=\count143
 \maxfields@=\count144
 \andhelp@=\toks38
-\eqnshift@=\dimen199
-\alignsep@=\dimen200
-\tagshift@=\dimen201
-\tagwidth@=\dimen202
-\totwidth@=\dimen203
-\lineht@=\dimen204
+\eqnshift@=\dimen200
+\alignsep@=\dimen201
+\tagshift@=\dimen202
+\tagwidth@=\dimen203
+\totwidth@=\dimen204
+\lineht@=\dimen205
 \@envbody=\toks39
 \multlinegap=\skip56
 \multlinetaggap=\skip57
@@ -1101,8 +1109,8 @@ File: tikzlibrarypositioning.code.tex 2008/10/06 v3.0.0 (rcs-revision 1.7)
 Package: calc 2007/08/22 v4.3 Infix arithmetic (KKT,FJ)
 \calc@Acount=\count148
 \calc@Bcount=\count149
-\calc@Adimen=\dimen205
-\calc@Bdimen=\dimen206
+\calc@Adimen=\dimen206
+\calc@Bdimen=\dimen207
 \calc@Askip=\skip58
 \calc@Bskip=\skip59
 LaTeX Info: Redefining \setlength on input line 75.
@@ -1136,14 +1144,14 @@ Document Style - pseudocode environments for use with the `algorithmicx' style
 \lst@gtempboxa=\box49
 \lst@token=\toks46
 \lst@length=\count160
-\lst@currlwidth=\dimen207
+\lst@currlwidth=\dimen208
 \lst@column=\count161
 \lst@pos=\count162
-\lst@lostspace=\dimen208
-\lst@width=\dimen209
+\lst@lostspace=\dimen209
+\lst@width=\dimen210
 \lst@newlines=\count163
 \lst@lineno=\count164
-\lst@maxwidth=\dimen210
+\lst@maxwidth=\dimen211
 
 (/usr/local/texlive/2014/texmf-dist/tex/latex/listings/lstmisc.sty
 File: lstmisc.sty 2014/03/04 1.5c (Carsten Heinz)
@@ -1244,27 +1252,27 @@ File: lstlang1.sty 2014/03/04 1.5c listings language file
 (./main.aux)
 \openout1 = `main.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 87.
-LaTeX Font Info:    ... okay on input line 87.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 87.
-LaTeX Font Info:    ... okay on input line 87.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 87.
-LaTeX Font Info:    ... okay on input line 87.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 87.
-LaTeX Font Info:    ... okay on input line 87.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 87.
-LaTeX Font Info:    ... okay on input line 87.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 87.
-LaTeX Font Info:    ... okay on input line 87.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 87.
-LaTeX Font Info:    Try loading font information for TS1+cmr on input line 87.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 84.
+LaTeX Font Info:    ... okay on input line 84.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 84.
+LaTeX Font Info:    ... okay on input line 84.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 84.
+LaTeX Font Info:    ... okay on input line 84.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 84.
+LaTeX Font Info:    ... okay on input line 84.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 84.
+LaTeX Font Info:    ... okay on input line 84.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 84.
+LaTeX Font Info:    ... okay on input line 84.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 84.
+LaTeX Font Info:    Try loading font information for TS1+cmr on input line 84.
  (/usr/local/texlive/2014/texmf-dist/tex/latex/base/ts1cmr.fd
 File: ts1cmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
-LaTeX Font Info:    ... okay on input line 87.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 87.
-LaTeX Font Info:    ... okay on input line 87.
-LaTeX Font Info:    Try loading font information for T1+lmr on input line 87.
+LaTeX Font Info:    ... okay on input line 84.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 84.
+LaTeX Font Info:    ... okay on input line 84.
+LaTeX Font Info:    Try loading font information for T1+lmr on input line 84.
 
 (/usr/local/texlive/2014/texmf-dist/tex/latex/lm/t1lmr.fd
 File: t1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
@@ -1272,13 +1280,13 @@ File: t1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 (/usr/local/texlive/2014/texmf-dist/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count167
-\scratchdimen=\dimen211
+\scratchdimen=\dimen212
 \scratchbox=\box51
 \nofMPsegments=\count168
 \nofMParguments=\count169
 \everyMPshowfont=\toks47
 \MPscratchCnt=\count170
-\MPscratchDim=\dimen212
+\MPscratchDim=\dimen213
 \MPnumerator=\count171
 \makeMPintoPDFobject=\count172
 \everyMPtoPDFconversion=\toks48
@@ -1287,7 +1295,7 @@ Option `squaren' provided!
  Command \squaren defined by SIunits package!
 
 \AtBeginShipoutBox=\box52
-Package hyperref Info: Link coloring OFF on input line 87.
+Package hyperref Info: Link coloring OFF on input line 84.
 (/usr/local/texlive/2014/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2012/10/27 v2.43 Cross-referencing by name of section
 
@@ -1296,9 +1304,9 @@ Package: gettitlestring 2010/12/03 v1.4 Cleanup title references (HO)
 )
 \c@section@level=\count173
 )
-LaTeX Info: Redefining \ref on input line 87.
-LaTeX Info: Redefining \pageref on input line 87.
-LaTeX Info: Redefining \nameref on input line 87.
+LaTeX Info: Redefining \ref on input line 84.
+LaTeX Info: Redefining \pageref on input line 84.
+LaTeX Info: Redefining \nameref on input line 84.
 
 (./main.out) (./main.out)
 \@outlinefile=\write4
@@ -1306,86 +1314,93 @@ LaTeX Info: Redefining \nameref on input line 87.
 
  ABD: EveryShipout initializing macros
 \c@lstlisting=\count174
-LaTeX Font Info:    Try loading font information for OT1+lmr on input line 91.
+LaTeX Font Info:    Try loading font information for OT1+lmr on input line 96.
 
 (/usr/local/texlive/2014/texmf-dist/tex/latex/lm/ot1lmr.fd
 File: ot1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-LaTeX Font Info:    Try loading font information for OML+lmm on input line 91.
+LaTeX Font Info:    Try loading font information for OML+lmm on input line 96.
 
 (/usr/local/texlive/2014/texmf-dist/tex/latex/lm/omllmm.fd
 File: omllmm.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-LaTeX Font Info:    Try loading font information for OMS+lmsy on input line 91.
+LaTeX Font Info:    Try loading font information for OMS+lmsy on input line 96.
 
 
 (/usr/local/texlive/2014/texmf-dist/tex/latex/lm/omslmsy.fd
 File: omslmsy.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-LaTeX Font Info:    Try loading font information for OMX+lmex on input line 91.
+LaTeX Font Info:    Try loading font information for OMX+lmex on input line 96.
 
 
 (/usr/local/texlive/2014/texmf-dist/tex/latex/lm/omxlmex.fd
 File: omxlmex.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10.95> on input line 91.
+(Font)              <12> on input line 96.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <8> on input line 91.
+(Font)              <8> on input line 96.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <6> on input line 91.
-LaTeX Font Info:    Try loading font information for U+msa on input line 91.
+(Font)              <6> on input line 96.
+LaTeX Font Info:    Try loading font information for U+msa on input line 96.
 
 (/usr/local/texlive/2014/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 91.
+LaTeX Font Info:    Try loading font information for U+msb on input line 96.
 
 (/usr/local/texlive/2014/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-LaTeX Font Info:    Try loading font information for U+rsfs on input line 91.
+LaTeX Font Info:    Try loading font information for U+rsfs on input line 96.
 
 (/usr/local/texlive/2014/texmf-dist/tex/latex/jknapltx/ursfs.fd
 File: ursfs.fd 1998/03/24 rsfs font definition file (jk)
-) (./mod1.tex)
-(./mod2.tex) (./mod3.tex) [1
+) [1
 
-{/usr/local/texlive/2014/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 111.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 111.
+{/usr/local/texlive/2014/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] (./mod1
+.tex
+LaTeX Font Info:    Try loading font information for T1+lmss on input line 8.
+
+(/usr/local/texlive/2014/texmf-dist/tex/latex/lm/t1lmss.fd
+File: t1lmss.fd 2009/10/30 v1.6 Font defs for Latin Modern
+) [2]) (./mod2.tex)
+(./mod3.tex [3]
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <10.95> on input line 7.
+) [4]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 110.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 110.
  (./main.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 111.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 111.
-
-
-Package rerunfilecheck Warning: File `main.out' has changed.
-(rerunfilecheck)                Rerun to get outlines right
-(rerunfilecheck)                or use package `bookmark'.
-
-Package rerunfilecheck Info: Checksums for `main.out':
-(rerunfilecheck)             Before: D41D8CD98F00B204E9800998ECF8427E;0
-(rerunfilecheck)             After:  9D560B52C40652DB09CEB4869E357530;126.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 111.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 110.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 110.
+Package rerunfilecheck Info: File `main.out' has not changed.
+(rerunfilecheck)             Checksum: C046295CD73FA205A31D0D0F742B40CF;227.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 110.
  ) 
 Here is how much of TeX's memory you used:
- 21284 strings out of 493117
- 376995 string characters out of 6135433
- 482318 words of memory out of 5000000
- 24260 multiletter control sequences out of 15000+600000
- 36070 words of font info for 44 fonts, out of 8000000 for 9000
+ 22033 strings out of 493117
+ 395719 string characters out of 6135433
+ 497697 words of memory out of 5000000
+ 24991 multiletter control sequences out of 15000+600000
+ 51864 words of font info for 55 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 55i,11n,72p,408b,339s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/local/texlive/2014/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}</usr/local/
-texlive/2014/texmf-dist/fonts/type1/public/lm/lmbx12.pfb></usr/local/texlive/20
-14/texmf-dist/fonts/type1/public/lm/lmcsc10.pfb></usr/local/texlive/2014/texmf-
-dist/fonts/type1/public/lm/lmr10.pfb></usr/local/texlive/2014/texmf-dist/fonts/
-type1/public/lm/lmr12.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/publi
-c/lm/lmr8.pfb>
-Output written on main.pdf (1 page, 101490 bytes).
+ 55i,8n,72p,561b,865s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/usr/local/texlive/2014/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}{/usr/lo
+cal/texlive/2014/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}{/usr/local/texlive/20
+14/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}{/usr/local/texlive/2014/texmf-d
+ist/fonts/enc/dvips/lm/lm-ec.enc}</usr/local/texlive/2014/texmf-dist/fonts/type
+1/public/lm/lmbx12.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/l
+m/lmmi10.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/lm/lmr10.pf
+b></usr/local/texlive/2014/texmf-dist/fonts/type1/public/lm/lmr12.pfb></usr/loc
+al/texlive/2014/texmf-dist/fonts/type1/public/lm/lmr17.pfb></usr/local/texlive/
+2014/texmf-dist/fonts/type1/public/lm/lmss10.pfb></usr/local/texlive/2014/texmf
+-dist/fonts/type1/public/lm/lmssbx10.pfb></usr/local/texlive/2014/texmf-dist/fo
+nts/type1/public/lm/lmsy10.pfb>
+Output written on main.pdf (4 pages, 166419 bytes).
 PDF statistics:
- 40 PDF objects out of 1000 (max. 8388607)
- 31 compressed objects within 1 object stream
- 5 named destinations out of 1000 (max. 500000)
- 13 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 90 PDF objects out of 1000 (max. 8388607)
+ 75 compressed objects within 1 object stream
+ 11 named destinations out of 1000 (max. 500000)
+ 45 words of extra memory for PDF output out of 10000 (max. 10000000)
 
