@@ -7,12 +7,23 @@ We also know that the 50 Gbit/s-demand can be rerouted after the actual values a
 Just as in the previous models, we introduce the set $I$ :
 $$I = \{ Sto,Lon,Ber,War,Par,Rom,Mad\}$$
 
-The main difference with previous models is the presence of uncertainty. As usual, we will handle this by discretizing this uncertainty into different scenarios with an associated probability. Each scenario corresponds to a complete set of known capacities. We can for example say that the second scenario is the one where the capacities are exactly those given. Let us assume that we have $S$ scenarios and define the parameters : 
+The main difference with previous models is the presence of uncertainty. As usual, we will handle this by discretizing this uncertainty into different scenarios $s$ with an associated probability $p_s$. Each scenario corresponds to a complete set of known capacities. We can for example say that the second scenario is the one where the capacities are exactly those given. Let us assume that we have $S$ scenarios and define the parameters : 
 \begin{align*}
-&c_{i,j,s} &\text{capacity in scenario $s$ from city $i$ to $j$} 
+&c_{i,j,s} &\text{capacity in scenario $s$ from city $i$ to $j$} \\
+& &i,j \in I \text{ and } s=1,...S
 \end{align*}
 
-In this case, we have that $i\in I$, $j\in I$ and $s = 1,...,S$.
+Let us also introduce the variables $x$, depicting the 40 Gbit/s-flow. Because this flow must be determined on beforehand, it cannot depend on the scenarios.
+\begin{align*}
+&x_{i,j} &\text{flow in Gbit/s going from $i$ to $j$ for the 40 Gbit/s-flow}\\
+& &i,j \in I
+\end{align*}
+
+Similarly, let us define the variables $y$ for the 50 Gbit/s-flow. This can be rerouted and thus we could potentially have different flows for different scenarios.
+\begin{align*}
+&y_{i,j,s} &\text{flow in Gbit/s going from $i$ to $j$ for the 50 Gbit/s-flow and scenario $s$}\\
+& &i,j \in I \text{ and } s=1,...,S
+\end{align*}
 
 
 
