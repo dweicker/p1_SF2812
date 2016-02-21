@@ -7,5 +7,13 @@ We also know that the 50 Gbit/s-demand can be rerouted after the actual values a
 Just as in the previous models, we introduce the set $I$ :
 $$I = \{ Sto,Lon,Ber,War,Par,Rom,Mad\}$$
 
+The main difference with previous models is the presence of uncertainty. As usual, we will handle this by discretizing this uncertainty into different scenarios with an associated probability. Each scenario corresponds to a complete set of known capacities. We can for example say that the second scenario is the one where the capacities are exactly those given. Let us assume that we have $S$ scenarios and define the parameters : 
+\begin{align*}
+&c_{i,j,s} &\text{capacity in scenario $s$ from city $i$ to $j$} 
+\end{align*}
+
+In this case, we have that $i\in I$, $j\in I$ and $s = 1,...,S$.
+
+
 
  
