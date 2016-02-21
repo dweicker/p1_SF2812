@@ -19,6 +19,7 @@
 \usepackage{hyperref}
 \usepackage{tikz}
 \usepackage{tikz-qtree}
+\usetikzlibrary{arrows}
 \usepackage{eurosym}
 %\usepackage{chemist}
 \usepackage{amsmath}
@@ -80,24 +81,22 @@
 
 \DeclareMathOperator{\e}{e}
 
-\title{Titre}
-\author{David Weicker}
-\date{\today}
-
 \begin{document}
 \tabulinesep=1.2mm
-\begin{center}
-\hrule
-\begin{tabular}{c}
-\\[0.005cm]
-\Large{Insert Title Here}\\[0.3cm] %THIS IS THE TITLE
-\textsc{NAME1} name1  \& \textsc{NAME2} name2\\[0.2cm]
-$\text{6}^{\text{th}}$ November 2015\\[0.2cm] %THIS IS THE DATE
-\end{tabular}
-\hrule
-\end{center}
+\title{Project Assignment 1A}
+\author{\today\\ SF2812 Applied Linear Optimization}
+\date{
+	\begin{tabular}{r c l}
+		Petter Aronsson & \href{mailto:petterar@kth.se}{petterar@kth.se} & 19900910-0414\\
+		David Weicker & \href{mailto:@kth.se}{@kth.se} & xxxxxx-xxxx\\
+		Henrik & \href{mailto:@kth.se}{@kth.se} & xxxxxx-xxxx\\
+	\end{tabular}
+}
+\maketitle
 
-\section{Model 1}
+\newpage
+
+\section*{Problem description}
 \input{mod1.tex}
 
 \section{Model 2}
