@@ -35,8 +35,67 @@ Figure 1. System modelled as a network where maximum capacity is marked out on t
 
 \newpage
 
-\section*{Routing the traffic}
+\section{Routing the traffic}
+In this section we investigate the best way to sent the traffic in the network. 50Gbit/s must be sent from Stockholm to Rome at the same time 40Gbit/s is sent from London to Warsaw without violating the capacity limitations. We would like to spread the traffic evenly. Therefore, we minimize the strain on any link in the network, i.e. traffic divided by the capacity.
 
+\subsection{Mathematical formulation}
+To solve this we treat the cities and links as a network and the traffic as a flow throughout the network. The cities are nodes connected by links which are arcs. Stockholm is a source node where 50Gbit/s comes in which will be distributed to the sink node Rome. The same goes for London and Warsaw respectively.
+
+We start by introduction the set $I$ :
+$$I = \{ Sto,Lon,Ber,War,Par,Rom,Mad\}$$
+
+The set $I$ make up for the network's node and an arc between node $i$ and $j$ is denoted as ($i$,$j$). The flows from Stockholm and London can be sent in the same link in either direction. However, the two flows must be treated independently. That being said, the 50Gbit/s that comes in from Stockholm is the same 50Gbit/s that arrives at Rome. We must keep track of the flows which is why we introduce another index k. The flow from Stockholm to Rome is $k=1$ and the flow from London to Warsaw is $k=2$.
+
+For each arc in the network, there will be a corresponding variable $x_{i,j,k}$ which denotes the flow from node $i$ to $j$ of flow $k$. Solving for the variable $x$ will provide the strategy for how to send the traffic between the cites. Though, there are two constraints which must be taken into account. 
+
+The first constraint deals with conservation of flow, i.e. the flow into a node is equal the flow out.
+$$\sum\limits_{j \in I} x_{i,j,k} - \sum\limits_{j \in I} x_{j,i,k} = b_{i}$$
+
+$$
+\text{where } b_{i} = 
+ \begin{bmatrix}
+  b_{Sto}\\
+  b_{Ber}\\
+  b_{War}\\
+  b_{Lon}\\
+  b_{Par}\\
+  b_{Mad}\\
+  b_{Rom}
+ \end{bmatrix} =
+ \begin{bmatrix}
+  50\\
+  0\\
+  -40\\
+  40\\
+  0\\
+  0\\
+  -50
+ \end{bmatrix}
+$$
+
+
+The other constraint is that both types of traffic, in either direction, must not exceed the capacity in each link. If there is no direct connections between two cities, the capacity is zero and no traffic can be sent in this arc.
+$$\sum\limits_{k =1}^2 x_{i,j,k} + \sum\limits_{k =1}^2 x_{j,i,k} \leq c_{i,j}\\$$
+
+$$
+\text{where $c_{i,j}$ is the maximum capacity in arc (i,j)}$$
+
+Finally, we define the objective function as the utility in a link.
+
+$$\frac{\sum\limits_{k =1}^2 x_{i,j,k} + \sum\limits_{k =1}^2 x_{j,i,k}}{c_{i,j}}$$
+
+Taking all the above into consideration, the mathematical formulation of the network flow optimization problem becomes:
+
+$$
+\begin{tabular}{r c l}
+		min & $\frac{\sum\limits_{k =1}^2 x_{i,j,k} + \sum\limits_{k =1}^2 x_{j,i,k}}{c_{i,j}}$\\
+		s.t. & $\sum\limits_{j \in I} x_{i,j,k} - \sum\limits_{j \in I} x_{j,i,k} = b_{i}$\\
+		& $\sum\limits_{k =1}^2 x_{i,j,k} + \sum\limits_{k =1}^2 x_{j,i,k} \leq c_{i,j}$\\
+		& $x_{i,j,k} \geq 0\quad \forall \: i,j \in I$
+	\end{tabular}
+$$
+
+\subsection{Result}
 \begin{center}
 \begin{tikzpicture}[->,shorten >=1pt,auto,node distance=6cm,
                     main node/.style={rectangle,draw,font=\sffamily\Large\bfseries}]
