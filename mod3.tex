@@ -7,11 +7,18 @@ We also know that the 50 Gbit/s-demand can be rerouted after the actual values a
 Just as in the previous models, we introduce the set $I$ :
 $$I = \{ Sto,Lon,Ber,War,Par,Rom,Mad\}$$
 
-The main difference with previous models is the presence of uncertainty. As usual, we will handle this by discretizing this uncertainty into different scenarios $s$ with an associated probability $p_s$. Each scenario corresponds to a complete set of known capacities. We can for example say that the second scenario is the one where the capacities are exactly those given. Let us assume that we have $S$ scenarios and define the parameters : 
+The main difference with previous models is the presence of uncertainty. As usual, we will handle this by discretizing this uncertainty into different scenarios $s$ with an associated probability $p_s$. Each scenario corresponds to a complete set of known capacities. We can for example say that the second scenario is the one where the capacities are exactly those given. The scenarios and the corresponding probabilities must be chosen beforehand and have an influence on the solution. We can intuitively say that if the scenarios do not vary much with respect to the mean, the solution will not vary much either. On the other hand, if at least one scenario is very different from the mean values given, we can expect a quite different solution. In this section, we assume that the set of scenarios are given. The results section presents the set of scenarios chosen by our group but it can easily be changed.
+
+Let us assume that we have $S$ scenarios and define the parameters : 
 \begin{align*}
-&c_{i,j,s} &\text{capacity in scenario $s$ from city $i$ to $j$} \\
+&c_{i,j,s} &\text{capacity in scenario $s$ between cities $i$ and $j$} \\
 & &i,j \in I \text{ and } s=1,...S
 \end{align*}
+
+For every scenario, we also introduce the variable $maxUtility_s$, the maximum utility in scenario $s$. It is clear that those variables must lie between 0 and 1.
+
+Our goal is to minimize the expected value of the maximum utility. Since scenario $s$ has probabily $p_s$, we have that our objective function is :
+$$\sum_{s=1}^S p_s\: maxUtility_s$$
 
 Let us also introduce the variables $x$, depicting the 40 Gbit/s-flow. Because this flow must be determined on beforehand, it cannot depend on the scenarios.
 \begin{align*}
@@ -56,20 +63,36 @@ $$\sum_{j\in I} x_{i,j} - \sum_{j\in I}x_{j,i} = b_i = \begin{bmatrix}
   a_{Rom}
  \end{bmatrix} =
  \begin{bmatrix}
-  -50\\
+  50\\
   0\\
   0\\
   0\\
   0\\
   0\\
-  50
+  -50
  \end{bmatrix}$$
  
- The other constraint is that the amount of flow cannot exceed the capacity. As stated above, we have a given capacity for each scenario. 
+ The other constraint is that the amount of flow cannot exceed the capacity. As stated above, we have a given capacity for each scenario. Because we know that the maximum utility is not larger than 1 and that we are minimizing a weighted sum of the maximum utilities, we have the following constraint :
  
- $$x_{i,j}+x_{j,i}+y_{i,j,s}+y_{j,i,s} \leq c_{i,j,s}$$
+ $$x_{i,j}+x_{j,i}+y_{i,j,s}+y_{j,i,s} \leq maxUtility_s \: c_{i,j,s}$$
  
  This equation must hold for every $i,j \in I$ and every scenario $s=1,...,S$ because we do not want to find ourselves in a position where we cannot route the traffic.
+ 
+ We now have everything we need and can state the full mathematical model.
+ 
+ \begin{align*}
+ &\min_{x,y,maxUtility} \quad \sum_{s=1}^S p_s \: maxUtility_s &\\
+ &s.t. \quad maxUtility_s \leq 1 &s=1,...,S\\
+ &\quad\quad \sum_{j\in I}x_{i,j} - \sum_{j\in I}x_{j,i} = b_i &i\in I\\
+ &\quad\quad \sum_{j\in I}y_{i,j,s} - \sum_{j\in I}y_{j,i,s} = a_i &i\in I,s=1,...,S\\
+ &\quad\quad x_{i,j}+x_{j,i}+y_{i,j,s}+y_{j,i,s} \leq maxUtility_s \: c_{i,j,s} &i,j\in I , s=1,...,S\\
+ &\quad\quad x_{i,j} \geq 0 & i,j\in I\\
+ &\quad \quad y_{i,j,s} \geq 0 & i,j\in I, s=1,...,S
+ \end{align*}
+ 
+ We can note that we do not need to add the positivity constraint for $maxUtility_s$ because the fourth constraint already demands it (because $x$,$y$ and $c$ are all positive).
+ 
+ We can also note that if the problem does not have a feasible region, it means that, at least in one of the scenario, it is not possible to route the traffic.
 
 
 
