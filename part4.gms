@@ -13,9 +13,9 @@ alias(i,j);
 set scenario /low,medium,high/;
 
 parameter fraction(scenario) fraction of change in the capacities
-	/low -0.1
-	 medium 0
-	 high 0.1/;
+        /low -0.1
+         medium 0
+         high 0.1/;
 
 table cap(i,i) capacities of the network
         Lon     Par     Ber     War     Mad     Rom
