@@ -27,17 +27,19 @@ War                                     18      22
 Mad                                             15;
 
 parameter e(i) define the B-flow
-        /Sto 50
-         Rom -50/;
+        /Sto -50
+         Rom 50/;
 parameter f(i) define the A-flow
-        /Lon 40
-         War -40/;
+        /Lon -40
+         War 40/;
 
 parameter actualCap(i,j,scenario);
 actualCap(i,j,scenario) = (1+fraction(scenario))*cap(i,j);
 
 parameter prob(scenario) probabilities of each scenario;
-prob(scenario) = 1/3;
+prob('low')=1/4;
+prob('medium')=1/2;
+prob('high')=1/4;
 
 variables
     x(i,j) flow going from i to j for the B-flow (must be fixed beforehand)
@@ -55,8 +57,8 @@ equations
     objective the objective function we want to minimize;
 
 capacities(i,j,scenario).. x(i,j)+x(j,i)+y(i,j,scenario)+y(j,i,scenario) =l= maxUt(scenario)*(actualCap(i,j,scenario)+actualCap(j,i,scenario));
-consB(i).. sum(j,x(i,j)) =e= sum(j,x(j,i)) + e(i);
-consA(i,scenario).. sum(j,y(i,j,scenario)) =e= sum(j,y(j,i,scenario)) + f(i);
+consB(i).. sum(j,x(i,j)) =e= sum(j,x(j,i)) + f(i);
+consA(i,scenario).. sum(j,y(i,j,scenario)) =e= sum(j,y(j,i,scenario)) + e(i);
 objective.. maxExp =e= sum(scenario,prob(scenario)*maxUt(scenario));
 
 model part4 /all/;

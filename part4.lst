@@ -1,4 +1,4 @@
-GAMS 24.6.1  r55820 Released Jan 18, 2016 DEX-DEG x86 64bit/MacOS X                                                                                                                                                                    02/22/16 14:26:13 Page 1
+GAMS 24.6.1  r55820 Released Jan 18, 2016 DEX-DEG x86 64bit/MacOS X                                                                                                                                                                    02/22/16 14:46:35 Page 1
 G e n e r a l   A l g e b r a i c   M o d e l i n g   S y s t e m
 C o m p i l a t i o n
 
@@ -18,9 +18,9 @@ C o m p i l a t i o n
   13  set scenario /low,medium,high/;
   14   
   15  parameter fraction(scenario) fraction of change in the capacities
-  16          /low -0.0
+  16          /low -0.1
   17           medium 0
-  18           high 0.0/;
+  18           high 0.1/;
   19   
   20  table cap(i,i) capacities of the network
   21          Lon     Par     Ber     War     Mad     Rom
@@ -32,56 +32,58 @@ C o m p i l a t i o n
   27  Mad                                             15;
   28   
   29  parameter e(i) define the B-flow
-  30          /Sto 50
-  31           Rom -50/;
+  30          /Sto -50
+  31           Rom 50/;
   32  parameter f(i) define the A-flow
-  33          /Lon 40
-  34           War -40/;
+  33          /Lon -40
+  34           War 40/;
   35   
   36  parameter actualCap(i,j,scenario);
   37  actualCap(i,j,scenario) = (1+fraction(scenario))*cap(i,j);
   38   
   39  parameter prob(scenario) probabilities of each scenario;
-  40  prob(scenario) = 1/3;
-  41   
-  42  variables
-  43      x(i,j) flow going from i to j for the B-flow (must be fixed beforehand)
-  44      y(i,j,scenario) flow going from i to j for the A-flow (can depend on the scenario)
-  45      maxUt(scenario) maximum utility in each scenario
-  46      maxExp   maximum expected utility;
-  47   
-  48  positive variables x,y;
-  49  maxUt.up(scenario) = 1;
-  50   
-  51  equations
-  52      capacities(i,j,scenario)  we do not exceed cap
-  53      consB(i) we have conservation of B-flow
-GAMS 24.6.1  r55820 Released Jan 18, 2016 DEX-DEG x86 64bit/MacOS X                                                                                                                                                                    02/22/16 14:26:13 Page 2
+  40  prob('low')=1/4;
+  41  prob('medium')=1/2;
+  42  prob('high')=1/4;
+  43   
+  44  variables
+  45      x(i,j) flow going from i to j for the B-flow (must be fixed beforehand)
+  46      y(i,j,scenario) flow going from i to j for the A-flow (can depend on the scenario)
+  47      maxUt(scenario) maximum utility in each scenario
+  48      maxExp   maximum expected utility;
+  49   
+  50  positive variables x,y;
+  51  maxUt.up(scenario) = 1;
+  52   
+  53  equations
+GAMS 24.6.1  r55820 Released Jan 18, 2016 DEX-DEG x86 64bit/MacOS X                                                                                                                                                                    02/22/16 14:46:35 Page 2
 G e n e r a l   A l g e b r a i c   M o d e l i n g   S y s t e m
 C o m p i l a t i o n
 
 
-  54      consA(i,scenario) we have conservation of A-flow for every scenario
-  55      objective the objective function we want to minimize;
-  56   
-  57  capacities(i,j,scenario).. x(i,j)+x(j,i)+y(i,j,scenario)+y(j,i,scenario) =l= maxUt(scenario)*(actualCap(i,j,scenario)+actualCap(j,i,scenario));
-  58  consB(i).. sum(j,x(i,j)) =e= sum(j,x(j,i)) + e(i);
-  59  consA(i,scenario).. sum(j,y(i,j,scenario)) =e= sum(j,y(j,i,scenario)) + f(i);
-  60  objective.. maxExp =e= sum(scenario,prob(scenario)*maxUt(scenario));
-  61   
-  62  model part4 /all/;
+  54      capacities(i,j,scenario)  we do not exceed cap
+  55      consB(i) we have conservation of B-flow
+  56      consA(i,scenario) we have conservation of A-flow for every scenario
+  57      objective the objective function we want to minimize;
+  58   
+  59  capacities(i,j,scenario).. x(i,j)+x(j,i)+y(i,j,scenario)+y(j,i,scenario) =l= maxUt(scenario)*(actualCap(i,j,scenario)+actualCap(j,i,scenario));
+  60  consB(i).. sum(j,x(i,j)) =e= sum(j,x(j,i)) + f(i);
+  61  consA(i,scenario).. sum(j,y(i,j,scenario)) =e= sum(j,y(j,i,scenario)) + e(i);
+  62  objective.. maxExp =e= sum(scenario,prob(scenario)*maxUt(scenario));
   63   
-  64  solve part4 using lp minimizing maxExp;
+  64  model part4 /all/;
   65   
-  66  display x.l;
-  67  display y.l;
-  68  display maxUt.l;
+  66  solve part4 using lp minimizing maxExp;
+  67   
+  68  display x.l;
+  69  display y.l;
+  70  display maxUt.l;
 
 
-COMPILATION TIME     =  0.000E+0000 SECONDS      3 MB  24.6.1 r55820 DEX-DEG
-GAMS 24.6.1  r55820 Released Jan 18, 2016 DEX-DEG x86 64bit/MacOS X                                                                                                                                                                    02/22/16 14:26:13 Page 3
+COMPILATION TIME     =        0.001 SECONDS      3 MB  24.6.1 r55820 DEX-DEG
+GAMS 24.6.1  r55820 Released Jan 18, 2016 DEX-DEG x86 64bit/MacOS X                                                                                                                                                                    02/22/16 14:46:35 Page 3
 G e n e r a l   A l g e b r a i c   M o d e l i n g   S y s t e m
-Equation Listing    SOLVE part4 Using LP From line 64
+Equation Listing    SOLVE part4 Using LP From line 66
 
 
 ---- capacities  =L=  we do not exceed cap
@@ -97,9 +99,9 @@ REMAINING 144 ENTRIES SKIPPED
 
 ---- consB  =E=  we have conservation of B-flow
 
-consB(Sto)..  x(Sto,Lon) + x(Sto,Par) + x(Sto,Ber) + x(Sto,War) + x(Sto,Mad) + x(Sto,Rom) - x(Lon,Sto) - x(Par,Sto) - x(Ber,Sto) - x(War,Sto) - x(Mad,Sto) - x(Rom,Sto) =E= 50 ; (LHS = 0, INFES = 50 ****)
+consB(Sto)..  x(Sto,Lon) + x(Sto,Par) + x(Sto,Ber) + x(Sto,War) + x(Sto,Mad) + x(Sto,Rom) - x(Lon,Sto) - x(Par,Sto) - x(Ber,Sto) - x(War,Sto) - x(Mad,Sto) - x(Rom,Sto) =E= 0 ; (LHS = 0)
      
-consB(Lon)..  - x(Sto,Lon) + x(Lon,Sto) + x(Lon,Par) + x(Lon,Ber) + x(Lon,War) + x(Lon,Mad) + x(Lon,Rom) - x(Par,Lon) - x(Ber,Lon) - x(War,Lon) - x(Mad,Lon) - x(Rom,Lon) =E= 0 ; (LHS = 0)
+consB(Lon)..  - x(Sto,Lon) + x(Lon,Sto) + x(Lon,Par) + x(Lon,Ber) + x(Lon,War) + x(Lon,Mad) + x(Lon,Rom) - x(Par,Lon) - x(Ber,Lon) - x(War,Lon) - x(Mad,Lon) - x(Rom,Lon) =E= -40 ; (LHS = 0, INFES = 40 ****)
      
 consB(Par)..  - x(Sto,Par) - x(Lon,Par) + x(Par,Sto) + x(Par,Lon) + x(Par,Ber) + x(Par,War) + x(Par,Mad) + x(Par,Rom) - x(Ber,Par) - x(War,Par) - x(Mad,Par) - x(Rom,Par) =E= 0 ; (LHS = 0)
      
@@ -108,24 +110,27 @@ REMAINING 4 ENTRIES SKIPPED
 
 ---- consA  =E=  we have conservation of A-flow for every scenario
 
-consA(Sto,low)..  y(Sto,Lon,low) + y(Sto,Par,low) + y(Sto,Ber,low) + y(Sto,War,low) + y(Sto,Mad,low) + y(Sto,Rom,low) - y(Lon,Sto,low) - y(Par,Sto,low) - y(Ber,Sto,low) - y(War,Sto,low) - y(Mad,Sto,low) - y(Rom,Sto,low) =E= 0 ; (LHS = 0)
+consA(Sto,low)..  y(Sto,Lon,low) + y(Sto,Par,low) + y(Sto,Ber,low) + y(Sto,War,low) + y(Sto,Mad,low) + y(Sto,Rom,low) - y(Lon,Sto,low) - y(Par,Sto,low) - y(Ber,Sto,low) - y(War,Sto,low) - y(Mad,Sto,low) - y(Rom,Sto,low) =E= -50 ; (LHS = 0
+     , INFES = 50 ****)
      
 consA(Sto,medium)..  y(Sto,Lon,medium) + y(Sto,Par,medium) + y(Sto,Ber,medium) + y(Sto,War,medium) + y(Sto,Mad,medium) + y(Sto,Rom,medium) - y(Lon,Sto,medium) - y(Par,Sto,medium) - y(Ber,Sto,medium) - y(War,Sto,medium) - y(Mad,Sto,medium)
      
-      - y(Rom,Sto,medium) =E= 0 ; (LHS = 0)
+      - y(Rom,Sto,medium) =E= -50 ; (LHS = 0, INFES = 50 ****)
      
-consA(Sto,high)..  y(Sto,Lon,high) + y(Sto,Par,high) + y(Sto,Ber,high) + y(Sto,War,high) + y(Sto,Mad,high) + y(Sto,Rom,high) - y(Lon,Sto,high) - y(Par,Sto,high) - y(Ber,Sto,high) - y(War,Sto,high) - y(Mad,Sto,high) - y(Rom,Sto,high) =E= 0 ; (LHS = 0)
+consA(Sto,high)..  y(Sto,Lon,high) + y(Sto,Par,high) + y(Sto,Ber,high) + y(Sto,War,high) + y(Sto,Mad,high) + y(Sto,Rom,high) - y(Lon,Sto,high) - y(Par,Sto,high) - y(Ber,Sto,high) - y(War,Sto,high) - y(Mad,Sto,high) - y(Rom,Sto,high) =E= -50 ;
+     
+      (LHS = 0, INFES = 50 ****)
      
 REMAINING 18 ENTRIES SKIPPED
 
 
 ---- objective  =E=  the objective function we want to minimize
 
-objective..  - 0.333333333333333*maxUt(low) - 0.333333333333333*maxUt(medium) - 0.333333333333333*maxUt(high) + maxExp =E= 0 ; (LHS = 0)
+objective..  - 0.25*maxUt(low) - 0.5*maxUt(medium) - 0.25*maxUt(high) + maxExp =E= 0 ; (LHS = 0)
      
-GAMS 24.6.1  r55820 Released Jan 18, 2016 DEX-DEG x86 64bit/MacOS X                                                                                                                                                                    02/22/16 14:26:13 Page 4
+GAMS 24.6.1  r55820 Released Jan 18, 2016 DEX-DEG x86 64bit/MacOS X                                                                                                                                                                    02/22/16 14:46:35 Page 4
 G e n e r a l   A l g e b r a i c   M o d e l i n g   S y s t e m
-Column Listing      SOLVE part4 Using LP From line 64
+Column Listing      SOLVE part4 Using LP From line 66
 
 
 ---- x  flow going from i to j for the B-flow (must be fixed beforehand)
@@ -180,42 +185,42 @@ REMAINING 144 ENTRIES SKIPPED
 
 maxUt(low)
                 (.LO, .L, .UP, .M = -INF, 0, 1, 0)
-      -11       capacities(Sto,Lon,low)
-GAMS 24.6.1  r55820 Released Jan 18, 2016 DEX-DEG x86 64bit/MacOS X                                                                                                                                                                    02/22/16 14:26:13 Page 5
+       -9.9     capacities(Sto,Lon,low)
+GAMS 24.6.1  r55820 Released Jan 18, 2016 DEX-DEG x86 64bit/MacOS X                                                                                                                                                                    02/22/16 14:46:35 Page 5
 G e n e r a l   A l g e b r a i c   M o d e l i n g   S y s t e m
-Column Listing      SOLVE part4 Using LP From line 64
+Column Listing      SOLVE part4 Using LP From line 66
 
 
      maxUt  maximum utility in each scenario
 
-      -14       capacities(Sto,Par,low)
-      -25       capacities(Sto,Ber,low)
-      -30       capacities(Sto,War,low)
-      -11       capacities(Lon,Sto,low)
-      -21       capacities(Lon,Par,low)
-      -17       capacities(Lon,Mad,low)
-      -14       capacities(Par,Sto,low)
-      -21       capacities(Par,Lon,low)
-      -22       capacities(Par,Ber,low)
-      -31       capacities(Par,Mad,low)
-      -19       capacities(Par,Rom,low)
-      -25       capacities(Ber,Sto,low)
-      -22       capacities(Ber,Par,low)
-      -26       capacities(Ber,War,low)
-      -18       capacities(Ber,Rom,low)
-      -30       capacities(War,Sto,low)
-      -26       capacities(War,Ber,low)
-      -18       capacities(War,Mad,low)
-      -22       capacities(War,Rom,low)
-      -17       capacities(Mad,Lon,low)
-      -31       capacities(Mad,Par,low)
-      -18       capacities(Mad,War,low)
-      -15       capacities(Mad,Rom,low)
-      -19       capacities(Rom,Par,low)
-      -18       capacities(Rom,Ber,low)
-      -22       capacities(Rom,War,low)
-      -15       capacities(Rom,Mad,low)
-       -0.3333  objective
+      -12.6     capacities(Sto,Par,low)
+      -22.5     capacities(Sto,Ber,low)
+      -27       capacities(Sto,War,low)
+       -9.9     capacities(Lon,Sto,low)
+      -18.9     capacities(Lon,Par,low)
+      -15.3     capacities(Lon,Mad,low)
+      -12.6     capacities(Par,Sto,low)
+      -18.9     capacities(Par,Lon,low)
+      -19.8     capacities(Par,Ber,low)
+      -27.9     capacities(Par,Mad,low)
+      -17.1     capacities(Par,Rom,low)
+      -22.5     capacities(Ber,Sto,low)
+      -19.8     capacities(Ber,Par,low)
+      -23.4     capacities(Ber,War,low)
+      -16.2     capacities(Ber,Rom,low)
+      -27       capacities(War,Sto,low)
+      -23.4     capacities(War,Ber,low)
+      -16.2     capacities(War,Mad,low)
+      -19.8     capacities(War,Rom,low)
+      -15.3     capacities(Mad,Lon,low)
+      -27.9     capacities(Mad,Par,low)
+      -16.2     capacities(Mad,War,low)
+      -13.5     capacities(Mad,Rom,low)
+      -17.1     capacities(Rom,Par,low)
+      -16.2     capacities(Rom,Ber,low)
+      -19.8     capacities(Rom,War,low)
+      -13.5     capacities(Rom,Mad,low)
+       -0.25    objective
 
 maxUt(medium)
                 (.LO, .L, .UP, .M = -INF, 0, 1, 0)
@@ -239,9 +244,9 @@ maxUt(medium)
       -26       capacities(War,Ber,medium)
       -18       capacities(War,Mad,medium)
       -22       capacities(War,Rom,medium)
-GAMS 24.6.1  r55820 Released Jan 18, 2016 DEX-DEG x86 64bit/MacOS X                                                                                                                                                                    02/22/16 14:26:13 Page 6
+GAMS 24.6.1  r55820 Released Jan 18, 2016 DEX-DEG x86 64bit/MacOS X                                                                                                                                                                    02/22/16 14:46:35 Page 6
 G e n e r a l   A l g e b r a i c   M o d e l i n g   S y s t e m
-Column Listing      SOLVE part4 Using LP From line 64
+Column Listing      SOLVE part4 Using LP From line 66
 
 
      maxUt  maximum utility in each scenario
@@ -254,39 +259,39 @@ Column Listing      SOLVE part4 Using LP From line 64
       -18       capacities(Rom,Ber,medium)
       -22       capacities(Rom,War,medium)
       -15       capacities(Rom,Mad,medium)
-       -0.3333  objective
+       -0.5     objective
 
 maxUt(high)
                 (.LO, .L, .UP, .M = -INF, 0, 1, 0)
-      -11       capacities(Sto,Lon,high)
-      -14       capacities(Sto,Par,high)
-      -25       capacities(Sto,Ber,high)
-      -30       capacities(Sto,War,high)
-      -11       capacities(Lon,Sto,high)
-      -21       capacities(Lon,Par,high)
-      -17       capacities(Lon,Mad,high)
-      -14       capacities(Par,Sto,high)
-      -21       capacities(Par,Lon,high)
-      -22       capacities(Par,Ber,high)
-      -31       capacities(Par,Mad,high)
-      -19       capacities(Par,Rom,high)
-      -25       capacities(Ber,Sto,high)
-      -22       capacities(Ber,Par,high)
-      -26       capacities(Ber,War,high)
-      -18       capacities(Ber,Rom,high)
-      -30       capacities(War,Sto,high)
-      -26       capacities(War,Ber,high)
-      -18       capacities(War,Mad,high)
-      -22       capacities(War,Rom,high)
-      -17       capacities(Mad,Lon,high)
-      -31       capacities(Mad,Par,high)
-      -18       capacities(Mad,War,high)
-      -15       capacities(Mad,Rom,high)
-      -19       capacities(Rom,Par,high)
-      -18       capacities(Rom,Ber,high)
-      -22       capacities(Rom,War,high)
-      -15       capacities(Rom,Mad,high)
-       -0.3333  objective
+      -12.1     capacities(Sto,Lon,high)
+      -15.4     capacities(Sto,Par,high)
+      -27.5     capacities(Sto,Ber,high)
+      -33       capacities(Sto,War,high)
+      -12.1     capacities(Lon,Sto,high)
+      -23.1     capacities(Lon,Par,high)
+      -18.7     capacities(Lon,Mad,high)
+      -15.4     capacities(Par,Sto,high)
+      -23.1     capacities(Par,Lon,high)
+      -24.2     capacities(Par,Ber,high)
+      -34.1     capacities(Par,Mad,high)
+      -20.9     capacities(Par,Rom,high)
+      -27.5     capacities(Ber,Sto,high)
+      -24.2     capacities(Ber,Par,high)
+      -28.6     capacities(Ber,War,high)
+      -19.8     capacities(Ber,Rom,high)
+      -33       capacities(War,Sto,high)
+      -28.6     capacities(War,Ber,high)
+      -19.8     capacities(War,Mad,high)
+      -24.2     capacities(War,Rom,high)
+      -18.7     capacities(Mad,Lon,high)
+      -34.1     capacities(Mad,Par,high)
+      -19.8     capacities(Mad,War,high)
+      -16.5     capacities(Mad,Rom,high)
+      -20.9     capacities(Rom,Par,high)
+      -19.8     capacities(Rom,Ber,high)
+      -24.2     capacities(Rom,War,high)
+      -16.5     capacities(Rom,Mad,high)
+       -0.25    objective
 
 
 ---- maxExp  maximum expected utility
@@ -295,9 +300,9 @@ maxExp
                 (.LO, .L, .UP, .M = -INF, 0, +INF, 0)
         1       objective
 
-GAMS 24.6.1  r55820 Released Jan 18, 2016 DEX-DEG x86 64bit/MacOS X                                                                                                                                                                    02/22/16 14:26:13 Page 7
+GAMS 24.6.1  r55820 Released Jan 18, 2016 DEX-DEG x86 64bit/MacOS X                                                                                                                                                                    02/22/16 14:46:35 Page 7
 G e n e r a l   A l g e b r a i c   M o d e l i n g   S y s t e m
-Model Statistics    SOLVE part4 Using LP From line 64
+Model Statistics    SOLVE part4 Using LP From line 66
 
 
 MODEL STATISTICS
@@ -307,27 +312,27 @@ BLOCKS OF VARIABLES           4     SINGLE VARIABLES          200
 NON ZERO ELEMENTS           970
 
 
-GENERATION TIME      =        0.007 SECONDS      4 MB  24.6.1 r55820 DEX-DEG
+GENERATION TIME      =        0.006 SECONDS      4 MB  24.6.1 r55820 DEX-DEG
 
 
-EXECUTION TIME       =        0.007 SECONDS      4 MB  24.6.1 r55820 DEX-DEG
-GAMS 24.6.1  r55820 Released Jan 18, 2016 DEX-DEG x86 64bit/MacOS X                                                                                                                                                                    02/22/16 14:26:13 Page 8
+EXECUTION TIME       =        0.006 SECONDS      4 MB  24.6.1 r55820 DEX-DEG
+GAMS 24.6.1  r55820 Released Jan 18, 2016 DEX-DEG x86 64bit/MacOS X                                                                                                                                                                    02/22/16 14:46:35 Page 8
 G e n e r a l   A l g e b r a i c   M o d e l i n g   S y s t e m
-Solution Report     SOLVE part4 Using LP From line 64
+Solution Report     SOLVE part4 Using LP From line 66
 
 
                S O L V E      S U M M A R Y
 
      MODEL   part4               OBJECTIVE  maxExp
      TYPE    LP                  DIRECTION  MINIMIZE
-     SOLVER  CPLEX               FROM LINE  64
+     SOLVER  CPLEX               FROM LINE  66
 
 **** SOLVER STATUS     1 Normal Completion         
 **** MODEL STATUS      1 Optimal                   
-**** OBJECTIVE VALUE                0.8571
+**** OBJECTIVE VALUE                0.8615
 
- RESOURCE USAGE, LIMIT          0.007      1000.000
- ITERATION COUNT, LIMIT        62    2000000000
+ RESOURCE USAGE, LIMIT          0.009      1000.000
+ ITERATION COUNT, LIMIT        66    2000000000
 
 IBM ILOG CPLEX   24.6.1 r55820 Released Jan 18, 2016 DEG x86 64bit/MacOS X    
 Cplex 12.6.3.0
@@ -335,9 +340,9 @@ Cplex 12.6.3.0
 Space for names approximately 0.01 Mb
 Use option 'names no' to turn use of names off
 LP status(1): optimal
-Cplex Time: 0.00sec (det. 0.56 ticks)
+Cplex Time: 0.00sec (det. 0.60 ticks)
 Optimal solution found.
-Objective :           0.857143
+Objective :           0.861472
 
 
 ---- EQU capacities  we do not exceed cap
@@ -349,29 +354,29 @@ Sto.Sto.medium        -INF             .              .              .
 Sto.Sto.high          -INF             .              .              .          
 Sto.Lon.low           -INF             .              .              .          
 Sto.Lon.medium        -INF             .              .              .          
-Sto.Lon.high          -INF             .              .            -0.0032      
-Sto.Par.low           -INF             .              .            -0.0032      
+Sto.Lon.high          -INF             .              .            -0.0022      
+Sto.Par.low           -INF             .              .            -0.0026      
 Sto.Par.medium        -INF             .              .              .          
 Sto.Par.high          -INF             .              .              .          
 Sto.Ber.low           -INF             .              .              .          
 Sto.Ber.medium        -INF             .              .              .          
 Sto.Ber.high          -INF             .              .              .          
-Sto.War.low           -INF             .              .             EPS         
+Sto.War.low           -INF             .              .       3.794708E-19      
 Sto.War.medium        -INF             .              .              .          
 Sto.War.high          -INF             .              .              .          
-Sto.Mad.low           -INF             .              .            -0.0032      
-Sto.Mad.medium        -INF             .              .            -0.0032      
-Sto.Mad.high          -INF             .              .            -0.0032      
-Sto.Rom.low           -INF             .              .            -0.0032      
-Sto.Rom.medium        -INF             .              .            -0.0032      
-Sto.Rom.high          -INF             .              .            -0.0032      
-Lon.Sto.low           -INF             .              .            -0.0032      
-Lon.Sto.medium        -INF             .              .            -0.0032      
+Sto.Mad.low           -INF             .              .            -0.0026      
+Sto.Mad.medium        -INF             .              .            -0.0048      
+Sto.Mad.high          -INF             .              .            -0.0022      
+Sto.Rom.low           -INF             .              .            -0.0026      
+Sto.Rom.medium        -INF             .              .            -0.0048      
+Sto.Rom.high          -INF             .              .            -0.0022      
+Lon.Sto.low           -INF             .              .            -0.0026      
+Lon.Sto.medium        -INF             .              .            -0.0048      
 Lon.Sto.high          -INF             .              .              .          
 Lon.Lon.low           -INF             .              .              .          
-GAMS 24.6.1  r55820 Released Jan 18, 2016 DEX-DEG x86 64bit/MacOS X                                                                                                                                                                    02/22/16 14:26:13 Page 9
+GAMS 24.6.1  r55820 Released Jan 18, 2016 DEX-DEG x86 64bit/MacOS X                                                                                                                                                                    02/22/16 14:46:35 Page 9
 G e n e r a l   A l g e b r a i c   M o d e l i n g   S y s t e m
-Solution Report     SOLVE part4 Using LP From line 64
+Solution Report     SOLVE part4 Using LP From line 66
 
 
      EQU capacities  we do not exceed cap
@@ -380,45 +385,45 @@ Solution Report     SOLVE part4 Using LP From line 64
 
 Lon.Lon.medium        -INF             .              .              .          
 Lon.Lon.high          -INF             .              .              .          
-Lon.Par.low           -INF             .              .              .          
-Lon.Par.medium        -INF           -1.7143          .              .          
+Lon.Par.low           -INF           -1.7143          .              .          
+Lon.Par.medium        -INF           -1.5714          .              .          
 Lon.Par.high          -INF           -1.7143          .              .          
-Lon.Ber.low           -INF             .              .            -0.0032      
-Lon.Ber.medium        -INF             .              .            -0.0032      
-Lon.Ber.high          -INF             .              .            -0.0032      
-Lon.War.low           -INF             .              .            -0.0032      
-Lon.War.medium        -INF             .              .            -0.0032      
-Lon.War.high          -INF             .              .            -0.0032      
-Lon.Mad.low           -INF           -1.7143          .              .          
-Lon.Mad.medium        -INF             .              .             EPS         
+Lon.Ber.low           -INF             .              .            -0.0026      
+Lon.Ber.medium        -INF             .              .            -0.0048      
+Lon.Ber.high          -INF             .              .            -0.0022      
+Lon.War.low           -INF             .              .            -0.0026      
+Lon.War.medium        -INF             .              .            -0.0048      
+Lon.War.high          -INF             .              .            -0.0022      
+Lon.Mad.low           -INF             .              .              .          
+Lon.Mad.medium        -INF           -0.1429          .              .          
 Lon.Mad.high          -INF             .              .             EPS         
-Lon.Rom.low           -INF             .              .       -3.03577E-18      
+Lon.Rom.low           -INF             .              .              .          
 Lon.Rom.medium        -INF             .              .              .          
-Lon.Rom.high          -INF             .              .              .          
+Lon.Rom.high          -INF             .              .       -1.08420E-18      
 Par.Sto.low           -INF             .              .              .          
-Par.Sto.medium        -INF             .              .            -0.0032      
-Par.Sto.high          -INF             .              .            -0.0032      
-Par.Lon.low           -INF             .              .             EPS         
-Par.Lon.medium        -INF           -1.7143          .              .          
+Par.Sto.medium        -INF             .              .            -0.0048      
+Par.Sto.high          -INF             .              .            -0.0022      
+Par.Lon.low           -INF           -1.7143          .              .          
+Par.Lon.medium        -INF           -1.5714          .              .          
 Par.Lon.high          -INF           -1.7143          .              .          
 Par.Par.low           -INF             .              .              .          
 Par.Par.medium        -INF             .              .              .          
 Par.Par.high          -INF             .              .              .          
-Par.Ber.low           -INF             .              .            -0.0032      
-Par.Ber.medium        -INF             .              .            -0.0032      
-Par.Ber.high          -INF             .              .            -0.0032      
-Par.War.low           -INF             .              .            -0.0032      
-Par.War.medium        -INF             .              .            -0.0032      
-Par.War.high          -INF             .              .            -0.0032      
-Par.Mad.low           -INF          -24.0000          .              .          
-Par.Mad.medium        -INF          -25.7143          .              .          
+Par.Ber.low           -INF             .              .            -0.0026      
+Par.Ber.medium        -INF             .              .            -0.0048      
+Par.Ber.high          -INF             .              .            -0.0022      
+Par.War.low           -INF             .              .            -0.0026      
+Par.War.medium        -INF             .              .            -0.0048      
+Par.War.high          -INF             .              .            -0.0022      
+Par.Mad.low           -INF          -25.5714          .              .          
+Par.Mad.medium        -INF          -25.5714          .              .          
 Par.Mad.high          -INF          -25.4286          .              .          
-Par.Rom.low           -INF             .              .              .          
+Par.Rom.low           -INF           -0.1429          .              .          
 Par.Rom.medium        -INF             .              .              .          
-Par.Rom.high          -INF           -0.2857          .              .          
-Ber.Sto.low           -INF             .              .              .          
-Ber.Sto.medium        -INF             .              .              .          
-Ber.Sto.high          -INF             .              .             EPS         
+Par.Rom.high          -INF             .              .              .          
+Ber.Sto.low           -INF             .              .       3.794708E-19      
+Ber.Sto.medium        -INF             .              .             EPS         
+Ber.Sto.high          -INF             .              .              .          
 Ber.Lon.low           -INF             .              .              .          
 Ber.Lon.medium        -INF             .              .              .          
 Ber.Lon.high          -INF             .              .              .          
@@ -427,9 +432,9 @@ Ber.Par.medium        -INF             .              .              .
 Ber.Par.high          -INF             .              .              .          
 Ber.Ber.low           -INF             .              .              .          
 Ber.Ber.medium        -INF             .              .              .          
-GAMS 24.6.1  r55820 Released Jan 18, 2016 DEX-DEG x86 64bit/MacOS X                                                                                                                                                                   02/22/16 14:26:13 Page 10
+GAMS 24.6.1  r55820 Released Jan 18, 2016 DEX-DEG x86 64bit/MacOS X                                                                                                                                                                   02/22/16 14:46:35 Page 10
 G e n e r a l   A l g e b r a i c   M o d e l i n g   S y s t e m
-Solution Report     SOLVE part4 Using LP From line 64
+Solution Report     SOLVE part4 Using LP From line 66
 
 
      EQU capacities  we do not exceed cap
@@ -440,14 +445,14 @@ Ber.Ber.high          -INF             .              .              .
 Ber.War.low           -INF           -5.1429          .              .          
 Ber.War.medium        -INF           -5.1429          .              .          
 Ber.War.high          -INF           -5.1429          .              .          
-Ber.Mad.low           -INF             .              .            -0.0032      
-Ber.Mad.medium        -INF             .              .            -0.0032      
-Ber.Mad.high          -INF             .              .            -0.0032      
+Ber.Mad.low           -INF             .              .            -0.0026      
+Ber.Mad.medium        -INF             .              .            -0.0048      
+Ber.Mad.high          -INF             .              .            -0.0022      
 Ber.Rom.low           -INF             .              .              .          
 Ber.Rom.medium        -INF             .              .              .          
 Ber.Rom.high          -INF             .              .              .          
 War.Sto.low           -INF             .              .              .          
-War.Sto.medium        -INF             .              .             EPS         
+War.Sto.medium        -INF             .              .              .          
 War.Sto.high          -INF             .              .             EPS         
 War.Lon.low           -INF             .              .              .          
 War.Lon.medium        -INF             .              .              .          
@@ -461,60 +466,60 @@ War.Ber.high          -INF           -5.1429          .              .
 War.War.low           -INF             .              .              .          
 War.War.medium        -INF             .              .              .          
 War.War.high          -INF             .              .              .          
-War.Mad.low           -INF             .              .            -0.0032      
+War.Mad.low           -INF             .              .            -0.0026      
 War.Mad.medium        -INF             .              .              .          
-War.Mad.high          -INF             .              .            -0.0032      
-War.Rom.low           -INF             .              .            -0.0032      
+War.Mad.high          -INF             .              .            -0.0022      
+War.Rom.low           -INF             .              .            -0.0026      
 War.Rom.medium        -INF             .              .              .          
 War.Rom.high          -INF             .              .              .          
 Mad.Sto.low           -INF             .              .              .          
 Mad.Sto.medium        -INF             .              .              .          
 Mad.Sto.high          -INF             .              .              .          
-Mad.Lon.low           -INF           -1.7143          .              .          
-Mad.Lon.medium        -INF             .              .              .          
+Mad.Lon.low           -INF             .              .              .          
+Mad.Lon.medium        -INF           -0.1429          .              .          
 Mad.Lon.high          -INF             .              .              .          
-Mad.Par.low           -INF          -24.0000          .              .          
-Mad.Par.medium        -INF          -25.7143          .              .          
+Mad.Par.low           -INF          -25.5714          .              .          
+Mad.Par.medium        -INF          -25.5714          .              .          
 Mad.Par.high          -INF          -25.4286          .              .          
 Mad.Ber.low           -INF             .              .              .          
 Mad.Ber.medium        -INF             .              .              .          
 Mad.Ber.high          -INF             .              .              .          
 Mad.War.low           -INF             .              .              .          
-Mad.War.medium        -INF             .              .            -0.0032      
+Mad.War.medium        -INF             .              .            -0.0048      
 Mad.War.high          -INF             .              .              .          
 Mad.Mad.low           -INF             .              .              .          
 Mad.Mad.medium        -INF             .              .              .          
 Mad.Mad.high          -INF             .              .              .          
-GAMS 24.6.1  r55820 Released Jan 18, 2016 DEX-DEG x86 64bit/MacOS X                                                                                                                                                                   02/22/16 14:26:13 Page 11
+GAMS 24.6.1  r55820 Released Jan 18, 2016 DEX-DEG x86 64bit/MacOS X                                                                                                                                                                   02/22/16 14:46:35 Page 11
 G e n e r a l   A l g e b r a i c   M o d e l i n g   S y s t e m
-Solution Report     SOLVE part4 Using LP From line 64
+Solution Report     SOLVE part4 Using LP From line 66
 
 
      EQU capacities  we do not exceed cap
 
                       LOWER          LEVEL          UPPER         MARGINAL
 
-Mad.Rom.low           -INF          -12.8571          .              .          
+Mad.Rom.low           -INF          -12.7143          .              .          
 Mad.Rom.medium        -INF          -12.8571          .              .          
-Mad.Rom.high          -INF          -12.5714          .              .          
+Mad.Rom.high          -INF          -12.8571          .              .          
 Rom.Sto.low           -INF             .              .              .          
 Rom.Sto.medium        -INF             .              .              .          
 Rom.Sto.high          -INF             .              .              .          
 Rom.Lon.low           -INF             .              .              .          
 Rom.Lon.medium        -INF             .              .              .          
 Rom.Lon.high          -INF             .              .              .          
-Rom.Par.low           -INF             .              .       2.168404E-18      
+Rom.Par.low           -INF           -0.1429          .              .          
 Rom.Par.medium        -INF             .              .              .          
-Rom.Par.high          -INF           -0.2857          .              .          
-Rom.Ber.low           -INF             .              .            -0.0032      
-Rom.Ber.medium        -INF             .              .            -0.0032      
-Rom.Ber.high          -INF             .              .            -0.0032      
+Rom.Par.high          -INF             .              .       -1.08420E-18      
+Rom.Ber.low           -INF             .              .            -0.0026      
+Rom.Ber.medium        -INF             .              .            -0.0048      
+Rom.Ber.high          -INF             .              .            -0.0022      
 Rom.War.low           -INF             .              .              .          
-Rom.War.medium        -INF             .              .            -0.0032      
-Rom.War.high          -INF             .              .            -0.0032      
-Rom.Mad.low           -INF          -12.8571          .              .          
+Rom.War.medium        -INF             .              .            -0.0048      
+Rom.War.high          -INF             .              .            -0.0022      
+Rom.Mad.low           -INF          -12.7143          .              .          
 Rom.Mad.medium        -INF          -12.8571          .              .          
-Rom.Mad.high          -INF          -12.5714          .              .          
+Rom.Mad.high          -INF          -12.8571          .              .          
 Rom.Rom.low           -INF             .              .              .          
 Rom.Rom.medium        -INF             .              .              .          
 Rom.Rom.high          -INF             .              .              .          
@@ -523,29 +528,29 @@ Rom.Rom.high          -INF             .              .              .
 
            LOWER          LEVEL          UPPER         MARGINAL
 
-Sto        50.0000        50.0000        50.0000         EPS         
-Lon          .              .              .            -0.0095      
-Par          .              .              .            -0.0095      
+Sto          .              .              .       3.794708E-19      
+Lon       -40.0000       -40.0000       -40.0000        -0.0096      
+Par          .              .              .            -0.0096      
 Ber          .              .              .              .          
-War          .              .              .             EPS         
-Mad          .              .              .            -0.0095      
-Rom       -50.0000       -50.0000       -50.0000        -0.0095      
+War        40.0000        40.0000        40.0000         EPS         
+Mad          .              .              .            -0.0096      
+Rom          .              .              .            -0.0096      
 
 ---- EQU consA  we have conservation of A-flow for every scenario
 
                   LOWER          LEVEL          UPPER         MARGINAL
 
-Sto.low             .              .              .             EPS         
-Sto.medium          .              .              .            -0.0032      
-Sto.high            .              .              .            -0.0032      
-Lon.low           40.0000        40.0000        40.0000         0.0032      
-Lon.medium        40.0000        40.0000        40.0000         EPS         
-Lon.high          40.0000        40.0000        40.0000         EPS         
-Par.low             .              .              .             0.0032      
+Sto.low          -50.0000       -50.0000       -50.0000   3.794708E-19      
+Sto.medium       -50.0000       -50.0000       -50.0000        -0.0048      
+Sto.high         -50.0000       -50.0000       -50.0000        -0.0022      
+Lon.low             .              .              .             0.0026      
+Lon.medium          .              .              .             EPS         
+Lon.high            .              .              .             EPS         
+Par.low             .              .              .             0.0026      
 Par.medium          .              .              .             EPS         
-GAMS 24.6.1  r55820 Released Jan 18, 2016 DEX-DEG x86 64bit/MacOS X                                                                                                                                                                   02/22/16 14:26:13 Page 12
+GAMS 24.6.1  r55820 Released Jan 18, 2016 DEX-DEG x86 64bit/MacOS X                                                                                                                                                                   02/22/16 14:46:35 Page 12
 G e n e r a l   A l g e b r a i c   M o d e l i n g   S y s t e m
-Solution Report     SOLVE part4 Using LP From line 64
+Solution Report     SOLVE part4 Using LP From line 66
 
 
      EQU consA  we have conservation of A-flow for every scenario
@@ -554,17 +559,17 @@ Solution Report     SOLVE part4 Using LP From line 64
 
 Par.high            .              .              .             EPS         
 Ber.low             .              .              .             EPS         
-Ber.medium          .              .              .            -0.0032      
-Ber.high            .              .              .            -0.0032      
-War.low          -40.0000       -40.0000       -40.0000          .          
-War.medium       -40.0000       -40.0000       -40.0000        -0.0032      
-War.high         -40.0000       -40.0000       -40.0000        -0.0032      
-Mad.low             .              .              .             0.0032      
+Ber.medium          .              .              .            -0.0048      
+Ber.high            .              .              .            -0.0022      
+War.low             .              .              .              .          
+War.medium          .              .              .            -0.0048      
+War.high            .              .              .            -0.0022      
+Mad.low             .              .              .             0.0026      
 Mad.medium          .              .              .              .          
 Mad.high            .              .              .              .          
-Rom.low             .              .              .             0.0032      
-Rom.medium          .              .              .             EPS         
-Rom.high            .              .              .             EPS         
+Rom.low           50.0000        50.0000        50.0000         0.0026      
+Rom.medium        50.0000        50.0000        50.0000         EPS         
+Rom.high          50.0000        50.0000        50.0000   1.084202E-18      
 
                            LOWER          LEVEL          UPPER         MARGINAL
 
@@ -577,33 +582,33 @@ Rom.high            .              .              .             EPS
                LOWER          LEVEL          UPPER         MARGINAL
 
 Sto.Sto          .              .            +INF            EPS         
-Sto.Lon          .             0.1429        +INF             .          
-Sto.Par          .            12.0000        +INF             .          
-Sto.Ber          .            19.2857        +INF             .          
-Sto.War          .            18.5714        +INF             .          
-Sto.Mad          .              .            +INF            EPS         
-Sto.Rom          .              .            +INF      3.469447E-18      
-Lon.Sto          .              .            +INF            0.0190      
+Sto.Lon          .             9.2857        +INF             .          
+Sto.Par          .              .            +INF            EPS         
+Sto.Ber          .              .            +INF      -7.58942E-19      
+Sto.War          .              .            +INF      -7.58942E-19      
+Sto.Mad          .              .            +INF             .          
+Sto.Rom          .              .            +INF      1.734723E-18      
+Lon.Sto          .              .            +INF            0.0191      
 Lon.Lon          .              .            +INF            EPS         
-Lon.Par          .             0.1429        +INF             .          
-Lon.Ber          .              .            +INF            0.0190      
-Lon.War          .              .            +INF            0.0190      
-Lon.Mad          .              .            +INF             .          
+Lon.Par          .              .            +INF            EPS         
+Lon.Ber          .              .            +INF            0.0191      
+Lon.War          .              .            +INF            0.0191      
+Lon.Mad          .              .            +INF            EPS         
 Lon.Rom          .              .            +INF      3.469447E-18      
-Par.Sto          .              .            +INF            0.0190      
-Par.Lon          .              .            +INF            EPS         
+Par.Sto          .              .            +INF            0.0191      
+Par.Lon          .            16.2857        +INF             .          
 Par.Par          .              .            +INF            EPS         
-Par.Ber          .              .            +INF            0.0190      
-Par.War          .              .            +INF            0.0190      
+Par.Ber          .              .            +INF            0.0191      
+Par.War          .              .            +INF            0.0191      
 Par.Mad          .              .            +INF            EPS         
-Par.Rom          .            16.0000        +INF             .          
-Ber.Sto          .              .            +INF            EPS         
-Ber.Lon          .              .            +INF            EPS         
-Ber.Par          .             3.8571        +INF             .          
+Par.Rom          .              .            +INF      3.469447E-18      
+Ber.Sto          .             2.1429        +INF             .          
+Ber.Lon          .              .            +INF             .          
+Ber.Par          .            15.0000        +INF             .          
 Ber.Ber          .              .            +INF            EPS         
-GAMS 24.6.1  r55820 Released Jan 18, 2016 DEX-DEG x86 64bit/MacOS X                                                                                                                                                                   02/22/16 14:26:13 Page 13
+GAMS 24.6.1  r55820 Released Jan 18, 2016 DEX-DEG x86 64bit/MacOS X                                                                                                                                                                   02/22/16 14:46:35 Page 13
 G e n e r a l   A l g e b r a i c   M o d e l i n g   S y s t e m
-Solution Report     SOLVE part4 Using LP From line 64
+Solution Report     SOLVE part4 Using LP From line 66
 
 
      VAR x  flow going from i to j for the B-flow (must be fixed beforehand)
@@ -611,28 +616,28 @@ Solution Report     SOLVE part4 Using LP From line 64
                LOWER          LEVEL          UPPER         MARGINAL
 
 Ber.War          .              .            +INF            EPS         
-Ber.Mad          .              .            +INF            EPS         
-Ber.Rom          .            15.4286        +INF             .          
-War.Sto          .              .            +INF            EPS         
-War.Lon          .              .            +INF            EPS         
-War.Par          .              .            +INF            EPS         
-War.Ber          .              .            +INF            EPS         
+Ber.Mad          .              .            +INF             .          
+Ber.Rom          .              .            +INF      1.734723E-18      
+War.Sto          .             7.1429        +INF             .          
+War.Lon          .              .            +INF             .          
+War.Par          .              .            +INF             .          
+War.Ber          .            17.1429        +INF             .          
 War.War          .              .            +INF            EPS         
-War.Mad          .              .            +INF            EPS         
-War.Rom          .            18.5714        +INF             .          
-Mad.Sto          .              .            +INF            0.0190      
-Mad.Lon          .              .            +INF            EPS         
-Mad.Par          .              .            +INF            EPS         
-Mad.Ber          .              .            +INF            0.0190      
-Mad.War          .              .            +INF            0.0190      
+War.Mad          .            15.4286        +INF             .          
+War.Rom          .             0.2857        +INF             .          
+Mad.Sto          .              .            +INF            0.0191      
+Mad.Lon          .            14.4286        +INF             .          
+Mad.Par          .             1.0000        +INF             .          
+Mad.Ber          .              .            +INF            0.0191      
+Mad.War          .              .            +INF            0.0191      
 Mad.Mad          .              .            +INF            EPS         
-Mad.Rom          .              .            +INF            EPS         
-Rom.Sto          .              .            +INF            0.0190      
-Rom.Lon          .              .            +INF      3.469447E-18      
-Rom.Par          .              .            +INF      -1.73472E-18      
-Rom.Ber          .              .            +INF            0.0190      
-Rom.War          .              .            +INF            0.0190      
-Rom.Mad          .              .            +INF            EPS         
+Mad.Rom          .              .            +INF      1.734723E-18      
+Rom.Sto          .              .            +INF            0.0191      
+Rom.Lon          .              .            +INF            EPS         
+Rom.Par          .             0.2857        +INF             .          
+Rom.Ber          .              .            +INF            0.0191      
+Rom.War          .              .            +INF            0.0191      
+Rom.Mad          .              .            +INF      -1.73472E-18      
 Rom.Rom          .              .            +INF            EPS         
 
 ---- VAR y  flow going from i to j for the A-flow (can depend on the scenario)
@@ -642,174 +647,174 @@ Rom.Rom          .              .            +INF            EPS
 Sto.Sto.low             .              .            +INF            EPS         
 Sto.Sto.medium          .              .            +INF            EPS         
 Sto.Sto.high            .              .            +INF            EPS         
-Sto.Lon.low             .              .            +INF            0.0063      
-Sto.Lon.medium          .              .            +INF            0.0063      
-Sto.Lon.high            .              .            +INF            0.0063      
-Sto.Par.low             .              .            +INF            0.0063      
-Sto.Par.medium          .              .            +INF            0.0063      
-Sto.Par.high            .              .            +INF            0.0063      
-Sto.Ber.low             .             2.1429        +INF             .          
-Sto.Ber.medium          .             2.1429        +INF             .          
-Sto.Ber.high            .             2.1429        +INF             .          
-Sto.War.low             .             7.1429        +INF             .          
-Sto.War.medium          .             7.1429        +INF             .          
-Sto.War.high            .             7.1429        +INF             .          
-Sto.Mad.low             .              .            +INF            0.0063      
-Sto.Mad.medium          .              .            +INF            0.0063      
-Sto.Mad.high            .              .            +INF            0.0063      
-Sto.Rom.low             .              .            +INF            0.0063      
-Sto.Rom.medium          .              .            +INF            0.0063      
-GAMS 24.6.1  r55820 Released Jan 18, 2016 DEX-DEG x86 64bit/MacOS X                                                                                                                                                                   02/22/16 14:26:13 Page 14
+Sto.Lon.low             .              .            +INF            0.0053      
+Sto.Lon.medium          .              .            +INF            0.0095      
+Sto.Lon.high            .              .            +INF            0.0043      
+Sto.Par.low             .              .            +INF            0.0053      
+Sto.Par.medium          .              .            +INF            0.0095      
+Sto.Par.high            .              .            +INF            0.0043      
+Sto.Ber.low             .              .            +INF      -7.58942E-19      
+Sto.Ber.medium          .              .            +INF            EPS         
+Sto.Ber.high            .              .            +INF            EPS         
+Sto.War.low             .              .            +INF      -7.58942E-19      
+Sto.War.medium          .              .            +INF            EPS         
+Sto.War.high            .              .            +INF            EPS         
+Sto.Mad.low             .              .            +INF            0.0053      
+Sto.Mad.medium          .              .            +INF            0.0095      
+Sto.Mad.high            .              .            +INF            0.0043      
+Sto.Rom.low             .              .            +INF            0.0053      
+Sto.Rom.medium          .              .            +INF            0.0095      
+GAMS 24.6.1  r55820 Released Jan 18, 2016 DEX-DEG x86 64bit/MacOS X                                                                                                                                                                   02/22/16 14:46:35 Page 14
 G e n e r a l   A l g e b r a i c   M o d e l i n g   S y s t e m
-Solution Report     SOLVE part4 Using LP From line 64
+Solution Report     SOLVE part4 Using LP From line 66
 
 
      VAR y  flow going from i to j for the A-flow (can depend on the scenario)
 
                       LOWER          LEVEL          UPPER         MARGINAL
 
-Sto.Rom.high            .              .            +INF            0.0063      
-Lon.Sto.low             .             9.2857        +INF             .          
-Lon.Sto.medium          .             9.2857        +INF             .          
-Lon.Sto.high            .             9.2857        +INF             .          
+Sto.Rom.high            .              .            +INF            0.0043      
+Lon.Sto.low             .             0.1429        +INF             .          
+Lon.Sto.medium          .             0.1429        +INF             .          
+Lon.Sto.high            .             0.1429        +INF             .          
 Lon.Lon.low             .              .            +INF            EPS         
 Lon.Lon.medium          .              .            +INF            EPS         
 Lon.Lon.high            .              .            +INF            EPS         
-Lon.Par.low             .            17.8571        +INF             .          
-Lon.Par.medium          .            16.1429        +INF             .          
-Lon.Par.high            .            16.1429        +INF             .          
-Lon.Ber.low             .              .            +INF             .          
+Lon.Par.low             .              .            +INF            EPS         
+Lon.Par.medium          .              .            +INF            EPS         
+Lon.Par.high            .              .            +INF            EPS         
+Lon.Ber.low             .              .            +INF      4.336809E-19      
 Lon.Ber.medium          .              .            +INF             .          
 Lon.Ber.high            .              .            +INF             .          
-Lon.War.low             .              .            +INF             .          
+Lon.War.low             .              .            +INF      4.336809E-19      
 Lon.War.medium          .              .            +INF             .          
 Lon.War.high            .              .            +INF             .          
-Lon.Mad.low             .            12.8571        +INF             .          
-Lon.Mad.medium          .            14.5714        +INF             .          
-Lon.Mad.high            .            14.5714        +INF             .          
-Lon.Rom.low             .              .            +INF      6.071532E-18      
+Lon.Mad.low             .              .            +INF            EPS         
+Lon.Mad.medium          .              .            +INF            EPS         
+Lon.Mad.high            .              .            +INF            EPS         
+Lon.Rom.low             .              .            +INF            EPS         
 Lon.Rom.medium          .              .            +INF            EPS         
-Lon.Rom.high            .              .            +INF            EPS         
-Par.Sto.low             .              .            +INF             .          
-Par.Sto.medium          .              .            +INF             .          
-Par.Sto.high            .              .            +INF      -4.33681E-19      
+Lon.Rom.high            .              .            +INF      2.168404E-18      
+Par.Sto.low             .            12.0000        +INF             .          
+Par.Sto.medium          .            12.0000        +INF             .          
+Par.Sto.high            .            12.0000        +INF             .          
 Par.Lon.low             .              .            +INF            EPS         
-Par.Lon.medium          .              .            +INF            EPS         
+Par.Lon.medium          .             0.1429        +INF             .          
 Par.Lon.high            .              .            +INF            EPS         
 Par.Par.low             .              .            +INF            EPS         
 Par.Par.medium          .              .            +INF            EPS         
 Par.Par.high            .              .            +INF            EPS         
-Par.Ber.low             .            15.0000        +INF             .          
-Par.Ber.medium          .            15.0000        +INF             .          
-Par.Ber.high            .            15.0000        +INF             .          
-Par.War.low             .              .            +INF             .          
+Par.Ber.low             .             3.8571        +INF             .          
+Par.Ber.medium          .             3.8571        +INF             .          
+Par.Ber.high            .             3.8571        +INF             .          
+Par.War.low             .              .            +INF      4.336809E-19      
 Par.War.medium          .              .            +INF             .          
 Par.War.high            .              .            +INF             .          
-Par.Mad.low             .             2.5714        +INF             .          
-Par.Mad.medium          .             0.8571        +INF             .          
-Par.Mad.high            .             1.1429        +INF             .          
-Par.Rom.low             .             0.2857        +INF             .          
-Par.Rom.medium          .             0.2857        +INF             .          
-Par.Rom.high            .              .            +INF            EPS         
-Ber.Sto.low             .              .            +INF            EPS         
-Ber.Sto.medium          .              .            +INF            EPS         
-Ber.Sto.high            .              .            +INF            EPS         
-Ber.Lon.low             .              .            +INF            0.0063      
-Ber.Lon.medium          .              .            +INF            0.0063      
-Ber.Lon.high            .              .            +INF            0.0063      
-GAMS 24.6.1  r55820 Released Jan 18, 2016 DEX-DEG x86 64bit/MacOS X                                                                                                                                                                   02/22/16 14:26:13 Page 15
+Par.Mad.low             .              .            +INF            EPS         
+Par.Mad.medium          .              .            +INF            EPS         
+Par.Mad.high            .             0.1429        +INF             .          
+Par.Rom.low             .              .            +INF            EPS         
+Par.Rom.medium          .              .            +INF            EPS         
+Par.Rom.high            .              .            +INF      2.168404E-18      
+Ber.Sto.low             .            19.2857        +INF             .          
+Ber.Sto.medium          .            19.2857        +INF             .          
+Ber.Sto.high            .            19.2857        +INF             .          
+Ber.Lon.low             .              .            +INF            0.0053      
+Ber.Lon.medium          .              .            +INF            0.0095      
+Ber.Lon.high            .              .            +INF            0.0043      
+GAMS 24.6.1  r55820 Released Jan 18, 2016 DEX-DEG x86 64bit/MacOS X                                                                                                                                                                   02/22/16 14:46:35 Page 15
 G e n e r a l   A l g e b r a i c   M o d e l i n g   S y s t e m
-Solution Report     SOLVE part4 Using LP From line 64
+Solution Report     SOLVE part4 Using LP From line 66
 
 
      VAR y  flow going from i to j for the A-flow (can depend on the scenario)
 
                       LOWER          LEVEL          UPPER         MARGINAL
 
-Ber.Par.low             .              .            +INF            0.0063      
-Ber.Par.medium          .              .            +INF            0.0063      
-Ber.Par.high            .              .            +INF            0.0063      
+Ber.Par.low             .              .            +INF            0.0053      
+Ber.Par.medium          .              .            +INF            0.0095      
+Ber.Par.high            .              .            +INF            0.0043      
 Ber.Ber.low             .              .            +INF            EPS         
 Ber.Ber.medium          .              .            +INF            EPS         
 Ber.Ber.high            .              .            +INF            EPS         
-Ber.War.low             .            17.1429        +INF             .          
-Ber.War.medium          .            17.1429        +INF             .          
-Ber.War.high            .            17.1429        +INF             .          
-Ber.Mad.low             .              .            +INF            0.0063      
-Ber.Mad.medium          .              .            +INF            0.0063      
-Ber.Mad.high            .              .            +INF            0.0063      
-Ber.Rom.low             .              .            +INF            0.0063      
-Ber.Rom.medium          .              .            +INF            0.0063      
-Ber.Rom.high            .              .            +INF            0.0063      
-War.Sto.low             .              .            +INF            EPS         
-War.Sto.medium          .              .            +INF            EPS         
-War.Sto.high            .              .            +INF            EPS         
-War.Lon.low             .              .            +INF            0.0063      
-War.Lon.medium          .              .            +INF            0.0063      
-War.Lon.high            .              .            +INF            0.0063      
-War.Par.low             .              .            +INF            0.0063      
-War.Par.medium          .              .            +INF            0.0063      
-War.Par.high            .              .            +INF            0.0063      
+Ber.War.low             .              .            +INF            EPS         
+Ber.War.medium          .              .            +INF            EPS         
+Ber.War.high            .              .            +INF            EPS         
+Ber.Mad.low             .              .            +INF            0.0053      
+Ber.Mad.medium          .              .            +INF            0.0095      
+Ber.Mad.high            .              .            +INF            0.0043      
+Ber.Rom.low             .              .            +INF            0.0053      
+Ber.Rom.medium          .              .            +INF            0.0095      
+Ber.Rom.high            .              .            +INF            0.0043      
+War.Sto.low             .            18.5714        +INF             .          
+War.Sto.medium          .            18.5714        +INF             .          
+War.Sto.high            .            18.5714        +INF             .          
+War.Lon.low             .              .            +INF            0.0053      
+War.Lon.medium          .              .            +INF            0.0095      
+War.Lon.high            .              .            +INF            0.0043      
+War.Par.low             .              .            +INF            0.0053      
+War.Par.medium          .              .            +INF            0.0095      
+War.Par.high            .              .            +INF            0.0043      
 War.Ber.low             .              .            +INF            EPS         
-War.Ber.medium          .              .            +INF            EPS         
-War.Ber.high            .              .            +INF            EPS         
+War.Ber.medium          .              .            +INF             .          
+War.Ber.high            .              .            +INF             .          
 War.War.low             .              .            +INF            EPS         
 War.War.medium          .              .            +INF            EPS         
 War.War.high            .              .            +INF            EPS         
-War.Mad.low             .              .            +INF            0.0063      
-War.Mad.medium          .              .            +INF            0.0063      
-War.Mad.high            .              .            +INF            0.0063      
-War.Rom.low             .              .            +INF            0.0063      
-War.Rom.medium          .              .            +INF            0.0063      
-War.Rom.high            .              .            +INF            0.0063      
-Mad.Sto.low             .              .            +INF             .          
+War.Mad.low             .              .            +INF            0.0053      
+War.Mad.medium          .              .            +INF            0.0095      
+War.Mad.high            .              .            +INF            0.0043      
+War.Rom.low             .              .            +INF            0.0053      
+War.Rom.medium          .              .            +INF            0.0095      
+War.Rom.high            .              .            +INF            0.0043      
+Mad.Sto.low             .              .            +INF      8.673617E-19      
 Mad.Sto.medium          .              .            +INF             .          
 Mad.Sto.high            .              .            +INF             .          
-Mad.Lon.low             .              .            +INF            EPS         
+Mad.Lon.low             .             0.1429        +INF             .          
 Mad.Lon.medium          .              .            +INF            EPS         
-Mad.Lon.high            .              .            +INF            EPS         
+Mad.Lon.high            .             0.1429        +INF             .          
 Mad.Par.low             .              .            +INF            EPS         
 Mad.Par.medium          .              .            +INF            EPS         
 Mad.Par.high            .              .            +INF            EPS         
-Mad.Ber.low             .              .            +INF             .          
+Mad.Ber.low             .              .            +INF      4.336809E-19      
 Mad.Ber.medium          .              .            +INF             .          
 Mad.Ber.high            .              .            +INF             .          
-Mad.War.low             .            15.4286        +INF             .          
-GAMS 24.6.1  r55820 Released Jan 18, 2016 DEX-DEG x86 64bit/MacOS X                                                                                                                                                                   02/22/16 14:26:13 Page 16
+Mad.War.low             .              .            +INF             .          
+GAMS 24.6.1  r55820 Released Jan 18, 2016 DEX-DEG x86 64bit/MacOS X                                                                                                                                                                   02/22/16 14:46:35 Page 16
 G e n e r a l   A l g e b r a i c   M o d e l i n g   S y s t e m
-Solution Report     SOLVE part4 Using LP From line 64
+Solution Report     SOLVE part4 Using LP From line 66
 
 
      VAR y  flow going from i to j for the A-flow (can depend on the scenario)
 
                       LOWER          LEVEL          UPPER         MARGINAL
 
-Mad.War.medium          .            15.4286        +INF             .          
-Mad.War.high            .            15.4286        +INF             .          
+Mad.War.medium          .              .            +INF      8.673617E-19      
+Mad.War.high            .              .            +INF             .          
 Mad.Mad.low             .              .            +INF            EPS         
 Mad.Mad.medium          .              .            +INF            EPS         
 Mad.Mad.high            .              .            +INF            EPS         
-Mad.Rom.low             .              .            +INF      3.035766E-18      
+Mad.Rom.low             .              .            +INF            EPS         
 Mad.Rom.medium          .              .            +INF            EPS         
-Mad.Rom.high            .             0.2857        +INF             .          
+Mad.Rom.high            .              .            +INF      1.084202E-18      
 Rom.Sto.low             .              .            +INF             .          
 Rom.Sto.medium          .              .            +INF             .          
 Rom.Sto.high            .              .            +INF             .          
-Rom.Lon.low             .              .            +INF             .          
+Rom.Lon.low             .              .            +INF            EPS         
 Rom.Lon.medium          .              .            +INF            EPS         
-Rom.Lon.high            .              .            +INF            EPS         
-Rom.Par.low             .              .            +INF      -5.20417E-18      
-Rom.Par.medium          .              .            +INF            EPS         
-Rom.Par.high            .              .            +INF            EPS         
-Rom.Ber.low             .              .            +INF      -1.73472E-18      
-Rom.Ber.medium          .              .            +INF             .          
-Rom.Ber.high            .              .            +INF             .          
-Rom.War.low             .             0.2857        +INF             .          
-Rom.War.medium          .             0.2857        +INF             .          
-Rom.War.high            .             0.2857        +INF             .          
-Rom.Mad.low             .              .            +INF      -3.03577E-18      
-Rom.Mad.medium          .              .            +INF            EPS         
-Rom.Mad.high            .              .            +INF            EPS         
+Rom.Lon.high            .              .            +INF             .          
+Rom.Par.low             .            15.8571        +INF             .          
+Rom.Par.medium          .            16.0000        +INF             .          
+Rom.Par.high            .            16.0000        +INF             .          
+Rom.Ber.low             .            15.4286        +INF             .          
+Rom.Ber.medium          .            15.4286        +INF             .          
+Rom.Ber.high            .            15.4286        +INF             .          
+Rom.War.low             .            18.5714        +INF             .          
+Rom.War.medium          .            18.5714        +INF             .          
+Rom.War.high            .            18.5714        +INF             .          
+Rom.Mad.low             .             0.1429        +INF             .          
+Rom.Mad.medium          .              .            +INF             .          
+Rom.Mad.high            .              .            +INF      -1.08420E-18      
 Rom.Rom.low             .              .            +INF            EPS         
 Rom.Rom.medium          .              .            +INF            EPS         
 Rom.Rom.high            .              .            +INF            EPS         
@@ -818,13 +823,13 @@ Rom.Rom.high            .              .            +INF            EPS
 
               LOWER          LEVEL          UPPER         MARGINAL
 
-low           -INF            0.8571         1.0000          .          
+low           -INF            0.9524         1.0000          .          
 medium        -INF            0.8571         1.0000          .          
-high          -INF            0.8571         1.0000          .          
+high          -INF            0.7792         1.0000          .          
 
                            LOWER          LEVEL          UPPER         MARGINAL
 
----- VAR maxExp            -INF            0.8571        +INF             .          
+---- VAR maxExp            -INF            0.8615        +INF             .          
 
   maxExp  maximum expected utility
 
@@ -832,47 +837,48 @@ high          -INF            0.8571         1.0000          .
 **** REPORT SUMMARY :        0     NONOPT
                              0 INFEASIBLE
                              0  UNBOUNDED
-GAMS 24.6.1  r55820 Released Jan 18, 2016 DEX-DEG x86 64bit/MacOS X                                                                                                                                                                   02/22/16 14:26:13 Page 17
+GAMS 24.6.1  r55820 Released Jan 18, 2016 DEX-DEG x86 64bit/MacOS X                                                                                                                                                                   02/22/16 14:46:35 Page 17
 G e n e r a l   A l g e b r a i c   M o d e l i n g   S y s t e m
 E x e c u t i o n
 
 
-----     66 VARIABLE x.L  flow going from i to j for the B-flow (must be fixed beforehand)
+----     68 VARIABLE x.L  flow going from i to j for the B-flow (must be fixed beforehand)
 
-            Lon         Par         Ber         War         Rom
+            Sto         Lon         Par         Ber         Mad         Rom
 
-Sto       0.143      12.000      19.286      18.571
-Lon                   0.143
-Par                                                      16.000
-Ber                   3.857                              15.429
-War                                                      18.571
+Sto                   9.286
+Par                  16.286
+Ber       2.143                  15.000
+War       7.143                              17.143      15.429       0.286
+Mad                  14.429       1.000
+Rom                               0.286
 
 
-----     67 VARIABLE y.L  flow going from i to j for the A-flow (can depend on the scenario)
+----     69 VARIABLE y.L  flow going from i to j for the A-flow (can depend on the scenario)
 
                 low      medium        high
 
-Sto.Ber       2.143       2.143       2.143
-Sto.War       7.143       7.143       7.143
-Lon.Sto       9.286       9.286       9.286
-Lon.Par      17.857      16.143      16.143
-Lon.Mad      12.857      14.571      14.571
-Par.Ber      15.000      15.000      15.000
-Par.Mad       2.571       0.857       1.143
-Par.Rom       0.286       0.286
-Ber.War      17.143      17.143      17.143
-Mad.War      15.429      15.429      15.429
-Mad.Rom                               0.286
-Rom.War       0.286       0.286       0.286
+Lon.Sto       0.143       0.143       0.143
+Par.Sto      12.000      12.000      12.000
+Par.Lon                   0.143
+Par.Ber       3.857       3.857       3.857
+Par.Mad                               0.143
+Ber.Sto      19.286      19.286      19.286
+War.Sto      18.571      18.571      18.571
+Mad.Lon       0.143                   0.143
+Rom.Par      15.857      16.000      16.000
+Rom.Ber      15.429      15.429      15.429
+Rom.War      18.571      18.571      18.571
+Rom.Mad       0.143
 
 
-----     68 VARIABLE maxUt.L  maximum utility in each scenario
+----     70 VARIABLE maxUt.L  maximum utility in each scenario
 
-low    0.857,    medium 0.857,    high   0.857
+low    0.952,    medium 0.857,    high   0.779
 
 
 
-EXECUTION TIME       =        0.004 SECONDS      3 MB  24.6.1 r55820 DEX-DEG
+EXECUTION TIME       =        0.005 SECONDS      3 MB  24.6.1 r55820 DEX-DEG
 
 
 USER: GAMS Development Corporation, Washington, DC   G871201/0000CA-ANY
