@@ -9,24 +9,55 @@ representing the nodes of the system.
 
 The flow from Stockholm to Rome is denoted $k=1$ and the flow from London to Warsaw is $k=2$. Thus, the added flow from Berlin to Rome is $k=3$. The variable $x_{i,j,k}$ represents the flow of traffic type $k$ from node $i$ to node $j$.
 
-As before, the first  gropu of constraints treats conservation of flow:
-$$\sum\limits_{j \in I} x_{i,j,k} - \sum\limits_{j \in I} x_{j,i,k} = a_{i} \quad k = 1$$
-$$\sum\limits_{j \in I} x_{i,j,k} - \sum\limits_{j \in I} x_{j,i,k} = b_{i} \quad k = 2$$
-$$\sum\limits_{j \in I} x_{i,j,k} - \sum\limits_{j \in I} x_{j,i,k} = q d_{i} \quad k = 3$$
-(Change as above)
+As before, the first  group of constraints treats conservation of flow:
+$$\sum\limits_{j \in I} x_{i,j,1} - \sum\limits_{j \in I} x_{j,i,1} = a_{i} \quad i \in I$$
+$$\sum\limits_{j \in I} x_{i,j,2} - \sum\limits_{j \in I} x_{j,i,2} = b_{i} \quad i \in I$$
+$$\sum\limits_{j \in I} x_{i,j,3} - \sum\limits_{j \in I} x_{j,i,3} = q d_{i} \quad i \in I$$
+Where $a_i$, $b_i$ and $d_i$ denotes the sources and sinks for each type of traffic and $q$ is the total amount of traffic for $k=3$. $a_i$ and $b_i$ is defined as previously
 
-The transmitted data is not to exceed the capacity between each node, which may be modelled as a second constraint:
-$$\sum\limits_{k =1}^3 x_{i,j,k} + \sum\limits_{k =1}^3 x_{j,i,k} \leq c_{i,j}\\$$
-where $c_{i,j}$ is the capacity between node $i$ and $j$.
+$$
+\text{and } d_{i} = 
+ \begin{bmatrix}
+  d_{Sto}\\
+  d_{Ber}\\
+  d_{War}\\
+  d_{Lon}\\
+  d_{Par}\\
+  d_{Mad}\\
+  d_{Rom}
+ \end{bmatrix} =
+ \begin{bmatrix}
+  0\\
+  1\\
+  0\\
+  0\\
+  0\\
+  -1\\
+  0
+ \end{bmatrix}
+$$
+
+
+
+The transmitted data is not to exceed the capacity between each node, which may be modelled as a forth constraint:
+$$\sum\limits_{k =1}^3 x_{i,j,k} + \sum\limits_{k =1}^3 x_{j,i,k} \leq c_{i,j} \quad i,j \in I\\$$
+where $c_{i,j}$ is the capacity between node $i$ and $j$. The objective function is the variable $q$,, which is to be maximized.
 
 
 The problem may thus be formulated as
 $$
 \begin{tabular}{r c l}
 		max & $q$\\
-		s.t. & $\sum\limits_{j \in I} x_{i,j,k} - \sum\limits_{j \in I} x_{j,i,k} = a_{i} + b_{i} + q d_{i}$\\
-		& $\sum\limits_{k =1}^3 x_{i,j,k} + \sum\limits_{k =1}^3 x_{j,i,k} \leq c_{i,j}$ & $ \forall \: i,j \in I$\\
-		& $x_{i,j,k} \geq 0$ & $ \forall \: i,j \in I \quad k \in \{1,2,3\}$
+		
+		s.t. & $\sum\limits_{j \in I} x_{i,j,1} - \sum\limits_{j \in I} x_{j,i,1} = a_{i}$ & $i \in I$\\
+		
+		& $\sum\limits_{j \in I} x_{i,j,2} - \sum\limits_{j \in I} x_{j,i,2} = b_{i}$ & $i \in I$\\
+		
+		& $\sum\limits_{j \in I} x_{i,j,3} - \sum\limits_{j \in I} x_{j,i,3} = q d_{i}$ & $i \in I$\\
+		
+		& $\sum\limits_{k =1}^3 x_{i,j,k} + \sum\limits_{k =1}^3 x_{j,i,k} \leq c_{i,j}$ & $ i,j \in I$\\
+		
+		& $x_{i,j,k} \geq 0$ & $i,j \in I \quad k \in \{1,2,3\}$
 	\end{tabular}
 $$
 
