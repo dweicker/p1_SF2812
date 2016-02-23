@@ -1,4 +1,4 @@
-GAMS 24.6.1  r55820 Released Jan 18, 2016 DEX-DEG x86 64bit/MacOS X                                                                                                                                                                    02/22/16 14:46:35 Page 1
+GAMS 24.6.1  r55820 Released Jan 18, 2016 DEX-DEG x86 64bit/MacOS X                                                                                                                                                                    02/23/16 11:15:11 Page 1
 G e n e r a l   A l g e b r a i c   M o d e l i n g   S y s t e m
 C o m p i l a t i o n
 
@@ -56,7 +56,7 @@ C o m p i l a t i o n
   51  maxUt.up(scenario) = 1;
   52   
   53  equations
-GAMS 24.6.1  r55820 Released Jan 18, 2016 DEX-DEG x86 64bit/MacOS X                                                                                                                                                                    02/22/16 14:46:35 Page 2
+GAMS 24.6.1  r55820 Released Jan 18, 2016 DEX-DEG x86 64bit/MacOS X                                                                                                                                                                    02/23/16 11:15:11 Page 2
 G e n e r a l   A l g e b r a i c   M o d e l i n g   S y s t e m
 C o m p i l a t i o n
 
@@ -78,10 +78,12 @@ C o m p i l a t i o n
   68  display x.l;
   69  display y.l;
   70  display maxUt.l;
+  71   
+  72   
 
 
-COMPILATION TIME     =        0.001 SECONDS      3 MB  24.6.1 r55820 DEX-DEG
-GAMS 24.6.1  r55820 Released Jan 18, 2016 DEX-DEG x86 64bit/MacOS X                                                                                                                                                                    02/22/16 14:46:35 Page 3
+COMPILATION TIME     =  0.000E+0000 SECONDS      3 MB  24.6.1 r55820 DEX-DEG
+GAMS 24.6.1  r55820 Released Jan 18, 2016 DEX-DEG x86 64bit/MacOS X                                                                                                                                                                    02/23/16 11:15:11 Page 3
 G e n e r a l   A l g e b r a i c   M o d e l i n g   S y s t e m
 Equation Listing    SOLVE part4 Using LP From line 66
 
@@ -128,7 +130,7 @@ REMAINING 18 ENTRIES SKIPPED
 
 objective..  - 0.25*maxUt(low) - 0.5*maxUt(medium) - 0.25*maxUt(high) + maxExp =E= 0 ; (LHS = 0)
      
-GAMS 24.6.1  r55820 Released Jan 18, 2016 DEX-DEG x86 64bit/MacOS X                                                                                                                                                                    02/22/16 14:46:35 Page 4
+GAMS 24.6.1  r55820 Released Jan 18, 2016 DEX-DEG x86 64bit/MacOS X                                                                                                                                                                    02/23/16 11:15:11 Page 4
 G e n e r a l   A l g e b r a i c   M o d e l i n g   S y s t e m
 Column Listing      SOLVE part4 Using LP From line 66
 
@@ -186,7 +188,7 @@ REMAINING 144 ENTRIES SKIPPED
 maxUt(low)
                 (.LO, .L, .UP, .M = -INF, 0, 1, 0)
        -9.9     capacities(Sto,Lon,low)
-GAMS 24.6.1  r55820 Released Jan 18, 2016 DEX-DEG x86 64bit/MacOS X                                                                                                                                                                    02/22/16 14:46:35 Page 5
+GAMS 24.6.1  r55820 Released Jan 18, 2016 DEX-DEG x86 64bit/MacOS X                                                                                                                                                                    02/23/16 11:15:11 Page 5
 G e n e r a l   A l g e b r a i c   M o d e l i n g   S y s t e m
 Column Listing      SOLVE part4 Using LP From line 66
 
@@ -244,7 +246,7 @@ maxUt(medium)
       -26       capacities(War,Ber,medium)
       -18       capacities(War,Mad,medium)
       -22       capacities(War,Rom,medium)
-GAMS 24.6.1  r55820 Released Jan 18, 2016 DEX-DEG x86 64bit/MacOS X                                                                                                                                                                    02/22/16 14:46:35 Page 6
+GAMS 24.6.1  r55820 Released Jan 18, 2016 DEX-DEG x86 64bit/MacOS X                                                                                                                                                                    02/23/16 11:15:11 Page 6
 G e n e r a l   A l g e b r a i c   M o d e l i n g   S y s t e m
 Column Listing      SOLVE part4 Using LP From line 66
 
@@ -300,7 +302,7 @@ maxExp
                 (.LO, .L, .UP, .M = -INF, 0, +INF, 0)
         1       objective
 
-GAMS 24.6.1  r55820 Released Jan 18, 2016 DEX-DEG x86 64bit/MacOS X                                                                                                                                                                    02/22/16 14:46:35 Page 7
+GAMS 24.6.1  r55820 Released Jan 18, 2016 DEX-DEG x86 64bit/MacOS X                                                                                                                                                                    02/23/16 11:15:11 Page 7
 G e n e r a l   A l g e b r a i c   M o d e l i n g   S y s t e m
 Model Statistics    SOLVE part4 Using LP From line 66
 
@@ -315,8 +317,8 @@ NON ZERO ELEMENTS           970
 GENERATION TIME      =        0.006 SECONDS      4 MB  24.6.1 r55820 DEX-DEG
 
 
-EXECUTION TIME       =        0.006 SECONDS      4 MB  24.6.1 r55820 DEX-DEG
-GAMS 24.6.1  r55820 Released Jan 18, 2016 DEX-DEG x86 64bit/MacOS X                                                                                                                                                                    02/22/16 14:46:35 Page 8
+EXECUTION TIME       =        0.007 SECONDS      4 MB  24.6.1 r55820 DEX-DEG
+GAMS 24.6.1  r55820 Released Jan 18, 2016 DEX-DEG x86 64bit/MacOS X                                                                                                                                                                    02/23/16 11:15:11 Page 8
 G e n e r a l   A l g e b r a i c   M o d e l i n g   S y s t e m
 Solution Report     SOLVE part4 Using LP From line 66
 
@@ -331,7 +333,7 @@ Solution Report     SOLVE part4 Using LP From line 66
 **** MODEL STATUS      1 Optimal                   
 **** OBJECTIVE VALUE                0.8615
 
- RESOURCE USAGE, LIMIT          0.009      1000.000
+ RESOURCE USAGE, LIMIT          0.008      1000.000
  ITERATION COUNT, LIMIT        66    2000000000
 
 IBM ILOG CPLEX   24.6.1 r55820 Released Jan 18, 2016 DEG x86 64bit/MacOS X    
@@ -374,7 +376,7 @@ Lon.Sto.low           -INF             .              .            -0.0026
 Lon.Sto.medium        -INF             .              .            -0.0048      
 Lon.Sto.high          -INF             .              .              .          
 Lon.Lon.low           -INF             .              .              .          
-GAMS 24.6.1  r55820 Released Jan 18, 2016 DEX-DEG x86 64bit/MacOS X                                                                                                                                                                    02/22/16 14:46:35 Page 9
+GAMS 24.6.1  r55820 Released Jan 18, 2016 DEX-DEG x86 64bit/MacOS X                                                                                                                                                                    02/23/16 11:15:11 Page 9
 G e n e r a l   A l g e b r a i c   M o d e l i n g   S y s t e m
 Solution Report     SOLVE part4 Using LP From line 66
 
@@ -432,7 +434,7 @@ Ber.Par.medium        -INF             .              .              .
 Ber.Par.high          -INF             .              .              .          
 Ber.Ber.low           -INF             .              .              .          
 Ber.Ber.medium        -INF             .              .              .          
-GAMS 24.6.1  r55820 Released Jan 18, 2016 DEX-DEG x86 64bit/MacOS X                                                                                                                                                                   02/22/16 14:46:35 Page 10
+GAMS 24.6.1  r55820 Released Jan 18, 2016 DEX-DEG x86 64bit/MacOS X                                                                                                                                                                   02/23/16 11:15:11 Page 10
 G e n e r a l   A l g e b r a i c   M o d e l i n g   S y s t e m
 Solution Report     SOLVE part4 Using LP From line 66
 
@@ -490,7 +492,7 @@ Mad.War.high          -INF             .              .              .
 Mad.Mad.low           -INF             .              .              .          
 Mad.Mad.medium        -INF             .              .              .          
 Mad.Mad.high          -INF             .              .              .          
-GAMS 24.6.1  r55820 Released Jan 18, 2016 DEX-DEG x86 64bit/MacOS X                                                                                                                                                                   02/22/16 14:46:35 Page 11
+GAMS 24.6.1  r55820 Released Jan 18, 2016 DEX-DEG x86 64bit/MacOS X                                                                                                                                                                   02/23/16 11:15:11 Page 11
 G e n e r a l   A l g e b r a i c   M o d e l i n g   S y s t e m
 Solution Report     SOLVE part4 Using LP From line 66
 
@@ -548,7 +550,7 @@ Lon.medium          .              .              .             EPS
 Lon.high            .              .              .             EPS         
 Par.low             .              .              .             0.0026      
 Par.medium          .              .              .             EPS         
-GAMS 24.6.1  r55820 Released Jan 18, 2016 DEX-DEG x86 64bit/MacOS X                                                                                                                                                                   02/22/16 14:46:35 Page 12
+GAMS 24.6.1  r55820 Released Jan 18, 2016 DEX-DEG x86 64bit/MacOS X                                                                                                                                                                   02/23/16 11:15:11 Page 12
 G e n e r a l   A l g e b r a i c   M o d e l i n g   S y s t e m
 Solution Report     SOLVE part4 Using LP From line 66
 
@@ -606,7 +608,7 @@ Ber.Sto          .             2.1429        +INF             .
 Ber.Lon          .              .            +INF             .          
 Ber.Par          .            15.0000        +INF             .          
 Ber.Ber          .              .            +INF            EPS         
-GAMS 24.6.1  r55820 Released Jan 18, 2016 DEX-DEG x86 64bit/MacOS X                                                                                                                                                                   02/22/16 14:46:35 Page 13
+GAMS 24.6.1  r55820 Released Jan 18, 2016 DEX-DEG x86 64bit/MacOS X                                                                                                                                                                   02/23/16 11:15:11 Page 13
 G e n e r a l   A l g e b r a i c   M o d e l i n g   S y s t e m
 Solution Report     SOLVE part4 Using LP From line 66
 
@@ -664,7 +666,7 @@ Sto.Mad.medium          .              .            +INF            0.0095
 Sto.Mad.high            .              .            +INF            0.0043      
 Sto.Rom.low             .              .            +INF            0.0053      
 Sto.Rom.medium          .              .            +INF            0.0095      
-GAMS 24.6.1  r55820 Released Jan 18, 2016 DEX-DEG x86 64bit/MacOS X                                                                                                                                                                   02/22/16 14:46:35 Page 14
+GAMS 24.6.1  r55820 Released Jan 18, 2016 DEX-DEG x86 64bit/MacOS X                                                                                                                                                                   02/23/16 11:15:11 Page 14
 G e n e r a l   A l g e b r a i c   M o d e l i n g   S y s t e m
 Solution Report     SOLVE part4 Using LP From line 66
 
@@ -722,7 +724,7 @@ Ber.Sto.high            .            19.2857        +INF             .
 Ber.Lon.low             .              .            +INF            0.0053      
 Ber.Lon.medium          .              .            +INF            0.0095      
 Ber.Lon.high            .              .            +INF            0.0043      
-GAMS 24.6.1  r55820 Released Jan 18, 2016 DEX-DEG x86 64bit/MacOS X                                                                                                                                                                   02/22/16 14:46:35 Page 15
+GAMS 24.6.1  r55820 Released Jan 18, 2016 DEX-DEG x86 64bit/MacOS X                                                                                                                                                                   02/23/16 11:15:11 Page 15
 G e n e r a l   A l g e b r a i c   M o d e l i n g   S y s t e m
 Solution Report     SOLVE part4 Using LP From line 66
 
@@ -780,7 +782,7 @@ Mad.Ber.low             .              .            +INF      4.336809E-19
 Mad.Ber.medium          .              .            +INF             .          
 Mad.Ber.high            .              .            +INF             .          
 Mad.War.low             .              .            +INF             .          
-GAMS 24.6.1  r55820 Released Jan 18, 2016 DEX-DEG x86 64bit/MacOS X                                                                                                                                                                   02/22/16 14:46:35 Page 16
+GAMS 24.6.1  r55820 Released Jan 18, 2016 DEX-DEG x86 64bit/MacOS X                                                                                                                                                                   02/23/16 11:15:11 Page 16
 G e n e r a l   A l g e b r a i c   M o d e l i n g   S y s t e m
 Solution Report     SOLVE part4 Using LP From line 66
 
@@ -837,7 +839,7 @@ high          -INF            0.7792         1.0000          .
 **** REPORT SUMMARY :        0     NONOPT
                              0 INFEASIBLE
                              0  UNBOUNDED
-GAMS 24.6.1  r55820 Released Jan 18, 2016 DEX-DEG x86 64bit/MacOS X                                                                                                                                                                   02/22/16 14:46:35 Page 17
+GAMS 24.6.1  r55820 Released Jan 18, 2016 DEX-DEG x86 64bit/MacOS X                                                                                                                                                                   02/23/16 11:15:11 Page 17
 G e n e r a l   A l g e b r a i c   M o d e l i n g   S y s t e m
 E x e c u t i o n
 

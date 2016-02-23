@@ -34,6 +34,8 @@ EXCEED..        maxX =l= 1;
 
 MODEL NETT /ALL/;
 
+option limrow = 49;
+
 SOLVE NETT USING LP MINIMIZING maxX;
 
 DISPLAY X.L, maxX.L;

@@ -7,3 +7,84 @@ $$c_{i,j,s} = \left\lbrace \begin{array}{c}
 c_{i,j} \quad\quad\qquad\:\:\:\: \text{if $s=2$}\\ 
 (1+p)c_{i,j} \quad\quad \text{if $s=3$}
 \end{array}\right.$$ 
+
+We also need to assign probability to each scenario. To preserve the fact that the mean value should be $c_{i,j}$, we have that $p_1=p_3$. We chose :
+$$p_{s} = \left\lbrace \begin{array}{c}
+0.25 \quad\quad \text{if $s=1$}\\ 
+0.5 \qquad\:\: \text{if $s=2$}\\ 
+0.25 \quad\quad \text{if $s=3$}
+\end{array}\right.$$ 
+
+With those scenarios and a chosen factor of $p=0.1$, we get the following expected utility : 
+$$\sum_{s=1}^3 p_s\: maxUtility_s = 0.8615$$
+
+It is a little bit over the utility obtained when we have certainty over the capacities. It is to be expected. Having complete information will yield better results. We also present below the utilities for each scenario :
+$$ 
+\begin{tabular}{|c|c|c|c|}
+\hline 
+ & $s=1$ & $s=2$ & $s=3$ \\ 
+\hline 
+$maxUtility_s$ & 0.952 & 0.857 & 0.779 \\ 
+\hline 
+\end{tabular} $$
+
+We can see that, the better the scenario, the better the utility. That is quite intuitive. We can also note that if $s=2$ (the capacities are the same as in the deterministic model), then it is possible to route the traffic to find the optimal value found with that model.
+
+Let us finally look at the proposed traffic. The 40 Gbit/s-flow is given in the table below. In our model, this corresponds to the variables $x_{i,j}$.
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|c|c|}
+\hline 
+i\textbackslash j & Sto & Lon & Par & Ber & Mad & Rom \\ 
+\hline 
+Sto &  & 9.286 &  &  &  &  \\ 
+\hline 
+Par &  & 16.286 &  &  &  &  \\ 
+\hline 
+Ber & 2.143 &  & 15.000 &  &  &  \\ 
+\hline 
+War & 7.143 &  &  & 17.143 & 15.429 & 0.286 \\ 
+\hline 
+Mad &  & 14.429 & 1.000 &  &  &  \\ 
+\hline 
+Rom &  &  & 0.286 &  &  &  \\ 
+\hline 
+\end{tabular} 
+\end{center}
+
+Note that this traffic is fixed and cannot depend on the scenarios. We can also check that we have indeed 40Gbit/s leaving Warsaw and 40 Gbit/s entering London. The conservation of flow is also respected. 
+
+Let us compare this solution to the one obtained for the deterministic model. We can see that it does not change much. 
+
+Let us also look at the 50Gbit/s-flow. In our model, this is the variable $y$. It can depend on the scenarios so we will have a different flow for each scenario. The table below gives the results.
+
+\begin{center}
+\begin{tabular}{|c|c|c|c|}
+\hline 
+ & low & medium & high \\ 
+\hline 
+Lon - Sto & 0.143 & 0.143 & 0.143 \\ 
+\hline 
+Par - Sto & 12 & 12 & 12 \\ 
+\hline 
+Par - Lon &  & 0.143 &  \\ 
+\hline 
+Par - Ber & 3.857 & 3.857 & 3.857 \\ 
+\hline 
+Par - Mad &  &  & 0.143 \\ 
+\hline 
+Ber - Sto & 19.286 & 19.286 & 19.286 \\ 
+\hline 
+War - Sto & 18.571 & 18.571 & 18.571 \\ 
+\hline 
+Mad - Lon & 0.143 &  & 0.143 \\ 
+\hline 
+Rom - Par & 15.857 & 16 & 16 \\ 
+\hline 
+Rom - Ber & 15.429 & 15.429 & 15.429 \\ 
+\hline 
+Rom - War & 18.571 & 18.571 & 18.571 \\ 
+\hline 
+Rom - Mad & 0.143 &  &  \\ 
+\hline 
+\end{tabular} 
+\end{center}
