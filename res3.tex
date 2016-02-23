@@ -32,21 +32,19 @@ We can see that, the better the scenario, the better the utility. That is quite 
 
 Let us finally look at the proposed traffic. The 40 Gbit/s-flow is given in the table below. In our model, this corresponds to the variables $x_{i,j}$.
 \begin{center}
-\begin{tabular}{|c|c|c|c|c|c|c|}
+\begin{tabular}{|c|c|c|c|c|c|}
 \hline 
-i\textbackslash j & Sto & Lon & Par & Ber & Mad & Rom \\ 
+i\textbackslash j & Sto & Par & Ber & War & Mad \\ 
 \hline 
-Sto &  & 9.286 &  &  &  &  \\ 
+Sto &  &  &  & 8.762 &  \\ 
 \hline 
-Par &  & 16.286 &  &  &  &  \\ 
+Lon & 8.762 & 17.333 &  &  & 13.905 \\ 
 \hline 
-Ber & 2.143 &  & 15.000 &  &  &  \\ 
+Par &  &  & 17.333 &  &  \\ 
 \hline 
-War & 7.143 &  &  & 17.143 & 15.429 & 0.286 \\ 
+Ber &  &  &  & 17.333 &  \\ 
 \hline 
-Mad &  & 14.429 & 1.000 &  &  &  \\ 
-\hline 
-Rom &  &  & 0.286 &  &  &  \\ 
+Mad &  &  &  & 13.905 &  \\ 
 \hline 
 \end{tabular} 
 \end{center}
@@ -60,31 +58,37 @@ Let us also look at the 50Gbit/s-flow. In our model, this is the variable $y$. I
 \begin{center}
 \begin{tabular}{|c|c|c|c|}
 \hline 
- & low & medium & high \\ 
+ & s = 1 & s = 2 & s = 3 \\ 
 \hline 
-Lon - Sto & 0.143 & 0.143 & 0.143 \\ 
+Sto - Lon & 0.667 & 0.667 & 0.667 \\ 
 \hline 
-Par - Sto & 12 & 12 & 12 \\ 
+Sto - Par & 12 & 12 & 12 \\ 
 \hline 
-Par - Lon &  & 0.143 &  \\ 
+Sto - Ber & 21.429 & 20.381 & 20.381 \\ 
 \hline 
-Par - Ber & 3.857 & 3.857 & 3.857 \\ 
+Sto - War & 15.905 & 16.952 & 16.952 \\ 
 \hline 
-Par - Mad &  &  & 0.143 \\ 
+Lon - Par & 0.667 & 0.667 &  \\ 
 \hline 
-Ber - Sto & 19.286 & 19.286 & 19.286 \\ 
+Lon - Mad &  &  & 0.667 \\ 
 \hline 
-War - Sto & 18.571 & 18.571 & 18.571 \\ 
+Par - Mad &  & 11.333 &  \\ 
 \hline 
-Mad - Lon & 0.143 &  & 0.143 \\ 
+Par - Rom & 14.190 & 2.857 & 13.524 \\ 
 \hline 
-Rom - Par & 15.857 & 16 & 16 \\ 
+Ber - Par & 1.524 & 1.524 & 1.524 \\ 
 \hline 
-Rom - Ber & 15.429 & 15.429 & 15.429 \\ 
+Ber - War & 4.476 & 3.429 & 3.429 \\ 
 \hline 
-Rom - War & 18.571 & 18.571 & 18.571 \\ 
+Ber - Rom & 15.429 & 15.429 & 15.429 \\ 
 \hline 
-Rom - Mad & 0.143 &  &  \\ 
+War - Mad & 1.524 & 1.524 & 1.524 \\ 
+\hline 
+War - Rom & 18.857 & 18.857 & 18.857 \\ 
+\hline 
+Mad - Rom & 1.524 & 12.857 & 2.190 \\ 
 \hline 
 \end{tabular} 
 \end{center}
+
+Once again, we can verify the conservation of flow along with the 50Gbit/s entry in Stockholm and 50Gbit/s output in Rome.

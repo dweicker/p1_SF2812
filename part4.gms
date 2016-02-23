@@ -27,11 +27,11 @@ War                                     18      22
 Mad                                             15;
 
 parameter e(i) define the B-flow
-        /Sto -50
-         Rom 50/;
+        /Sto 50
+         Rom -50/;
 parameter f(i) define the A-flow
-        /Lon -40
-         War 40/;
+        /Lon 40
+         War -40/;
 
 parameter actualCap(i,j,scenario);
 actualCap(i,j,scenario) = (1+fraction(scenario))*cap(i,j);
