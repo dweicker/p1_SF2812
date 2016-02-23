@@ -91,4 +91,6 @@ Mad - Rom & 1.524 & 12.857 & 2.190 \\
 \end{tabular} 
 \end{center}
 
-Once again, we can verify the conservation of flow along with the 50Gbit/s entry in Stockholm and 50Gbit/s output in Rome.
+Once again, we can verify the conservation of flow along with the 50Gbit/s entry in Stockholm and 50Gbit/s output in Rome. We can also see that the solution does not change much if we compare to the one from the basic exercise. 
+
+In conclusion, the solution is not very different from the one obtained in deterministic programming. This is because the scenarios chosen are close to the mean. Also, the same factor is applied to every link in the graph. We could for example consider a scenario where part of the links increase their capacity while other decrease it. We would then have a very different solution. We can also note that, in order to have a feasible region, the factor $p$ must not be too large. For example, if $p=0.2$ then the problem is not feasible. It can easily be seen with the capacities around London. The total mean capacity around London is $11+21+17 = 49$. So if we take 20\% out of that, we get $0.8(11+21+17) = 39.2$. Which is not enough to route a 40 Gbit/s-flow out of London.

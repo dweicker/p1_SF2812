@@ -42,16 +42,6 @@
 \usepackage{todonotes}
 \usepackage[noend]{algpseudocode}
 
-\newcommand\diag[4]{%
-  \multicolumn{1}{p{#2}|}{\hskip-\tabcolsep
-  $\vcenter{\begin{tikzpicture}[baseline=0,anchor=south west,inner sep=#1]
-  \path[use as bounding box] (0,0) rectangle (#2+2\tabcolsep,\baselineskip);
-  \node[minimum width={#2+2\tabcolsep},minimum height=\baselineskip+\extrarowheight] (box) {};
-  \draw (box.north west) -- (box.south east);
-  \node[anchor=south west] at (box.south west) {#3};
-  \node[anchor=north east] at (box.north east) {#4};
- \end{tikzpicture}}$\hskip-\tabcolsep}}
-
 
 %\newtheorem{theoreme}			     {Théorème}	[chapter]
 %\newtheorem{proposition}[theoreme]	 {Proposition}	
@@ -100,12 +90,13 @@
 	\begin{tabular}{r c l}
 		Petter Aronsson & \href{mailto:petterar@kth.se}{petterar@kth.se} & 19900910-0414\\
 		Henrik Ekestam & \href{mailto:hekestam@kth.se}{hekestam@kth.se} & 19931113-5678\\
-		David Weicker & \href{mailto:@kth.se}{@kth.se} & xxxxxx-xxxx\\
+		David Weicker & \href{mailto:weicker@kth.se}{weicker@kth.se} & 940114-T115\\
 	\end{tabular}
 }
 \maketitle
 
-\section*{Problem description}
+
+%\section*{Problem description}
 \input{mod1.tex}
 
 \section{Model 2:}
@@ -124,6 +115,14 @@
 \subsection{Results model 3}
 \input{res3.tex}
 
+\section{Conclusion}
+In this report, our group has presented three models to help Nett in finding the best way to route two (or three) flow through a given graph.
+
+In the first model, we are trying to determine the slackness in the graph. We found that the capacities were used up to 85.7\%. This means that it is possible to increase the flow without breaking the capacity constraints.
+
+In the second, we looked for the largest additional traffic the graph could contain. If we choose Madrid and Berlin as end points, we found that the maximal traffic would be of 15 Gbit/s. The traffic between Stockholm and Rome and between London and Warsaw must be rerouted and cannot stay the same as in the first model if we want the optimal solution.
+
+In the last one, we took into account that the capacities given could change and were stochastic parameters. We defined different scenarios and minimized the expected utility. It was of 86.15\%. It is easy to refine the solution by adding more scenarios.
 
 
 \end{document}
