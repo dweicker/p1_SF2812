@@ -99,20 +99,17 @@
 %\section*{Problem description}
 \input{mod1.tex}
 
-\section{Model 2:}
+\section{Maximal additional flow}
 \input{mod2.tex}
 
-\section{Model 3}
+\section{Stochastic model}
 \input{mod3.tex}
 
 \clearpage
 
 \section{Results}
-\subsection{Results  model 1}
 \input{res1.tex}
-\subsection{Results model 2}
 \input{res2.tex}
-\subsection{Results model 3}
 \input{res3.tex}
 
 \section{Conclusion}
@@ -122,7 +119,7 @@ In the first model, we are trying to determine the slackness in the graph. We fo
 
 In the second, we looked for the largest additional traffic the graph could contain. If we choose Madrid and Berlin as end points, we found that the maximal traffic would be of 15 Gbit/s. The traffic between Stockholm and Rome and between London and Warsaw must be rerouted and cannot stay the same as in the first model if we want the optimal solution.
 
-In the last one, we took into account that the capacities given could change and were stochastic parameters. We defined different scenarios and minimized the expected utility. It was of 86.15\%. It is easy to refine the solution by adding more scenarios.
+In the last one, we took into account that the capacities given could change and were stochastic parameters. We defined different scenarios and minimized the expected utility. It was of 86.15\% which is higher than in the deterministic model because of the uncertainty. It is easy to refine the solution by adding more scenarios.
 
 
 \end{document}

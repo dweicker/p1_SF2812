@@ -1,7 +1,10 @@
+This section presents the results for the different models presented above.
+
+\subsection{Results for routing the traffic}
 The solution to routing the traffic in the network when minimizing the maximum utility in any link can be seen in Figure 2. The figure shows how much of each type of traffic that is to be sent in each arc. The blue numbers, $k=1$, denotes the flow from Stockholm to Rome and the red numbers, $k=2$, denotes the flow from London to Warsaw. 
 
 \begin{center}
-\begin{tikzpicture}[->,thick,shorten >=1pt,auto,node distance=5.4cm,
+\begin{tikzpicture}[->,thick,shorten >=1pt,auto,node distance=5.1cm,
 main node/.style={rectangle,draw,font=\sffamily\Large\bfseries},
 plain node/.style={circle,draw,font=\sffamily\Large\bfseries}]
   \node[main node] (1) {Stockholm};
@@ -46,7 +49,7 @@ plain node/.style={circle,draw,font=\sffamily\Large\bfseries}]
 \end{center}
 Figure 2. Result of routing for each type of traffic rounded to the nearest decimal.
 
-Addition to the solution of the variable $x_{i,j,k}$, we also solved for the variable $maxUtility$. The minimum value of utility when routing traffic is $$maxUtility = 0.857$$
+Addition to the solution of the variable $x_{i,j,k}$, we also solved for the variable $maxUtility$. The optimal value of utility when routing traffic is $$maxUtility = 0.857$$
 
 To determine whether there is any slack in the network, let us investigate the utility in each link.
 
@@ -75,11 +78,13 @@ Mad -- Rom & 0\%      \\ \hline
 
 For almost all of the links, the utility is $85.7\%$, which means the traffic is spread evenly. However, there are three links in which there is slack; arcs $(Par,Mad), (Ber,War) \text{ and } (Mad,Rom)$. The connection between Madrid and Rome is not used at all and could be taken away without changing the routing of traffic.
 
-On the other hand, let us now investigate in which links Nett should buy extra capacity in order to create more slack, i.e. decrease the maximum utility. One might think that Nett should invest in all links where the utility is $85.7\%$. Though, this is not true because there are some links where the strain is more severe. In other words, there are some key links in the network which limit the minimum value of the utility.
+On the other hand, let us now investigate in which links Nett should buy extra capacity in order to create more slack, i.e. decrease the maximum utility. One might think that Nett should invest in all links where the utility is $85.7\%$. Though, this is not true because there are some links where the strain is more severe. In other words, there are some key links in the network which limit the optimal value of the utility.
 
-Along with the solution to the variables in the network problem, we also got \textit{marginal values} for all the capacities in the network respectively. Consider the third constraint in the optimization problem, which controls that the traffic does not exceed the capacity. If we were to move all the variables to the left hand side and keep the constants on the right hand side, the marginal values denote the amount that the objective function change if the right hand side were increased by 1.0. In our case, we simply look at which capacities to increase in order to generate the highest decrease in utility.
+Along with the solution to the variables in the network problem, we also got \textit{marginal values} for all the capacities in the network respectively. Consider the third constraint in the optimization problem, which controls that the traffic does not exceed the capacity. If we were to move all the variables to the left hand side and keep the constants on the right hand side, the marginal values denote the amount that the objective function change if the right hand side were increased by 1.0. However, the marginal value is only correct for differential changes in the right hand side. In our case, we simply look at which capacities to increase in order to generate the highest decrease in utility.
 
 There are 5 links, with the same marginal value, which we recommend Nett to invest in extra capacity. The links are
 $$
 (Sto,Lon), (Sto,Par), (Ber,Par), (War,Mad) \text{ and }(War,Rom)
 $$
+
+Furthermore, we also discovered the same marginal values for links that do not exist today. If we were to create them, they would have the same influence as the links stated above. For example, Nett should consider buying capacity links between $(Sto,Mad)$ or $(Sto,Rom)$.

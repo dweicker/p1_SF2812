@@ -1,4 +1,6 @@
-The maximum available capacity between Berlin and Madrid was found by maximizing the objective function under the constraints in the mathemathical model section above. The resulting optimal solution was calculated using GAMS to be $q = 15$ Gbit/s. Table \ref{table:res2} below presents the resulting system of traffic flow between each node separated into each type of traffic. 
+\subsection{Result for additional flow}
+
+The maximum available capacity between Berlin and Madrid was found by maximizing the objective function under the constraints in the mathemathical model section 3.2. The resulting optimal solution was calculated using GAMS to be $q = 15$ Gbit/s. Table \ref{table:res2} below presents the resulting system of traffic flow between each node separated into each type of traffic. 
 
 \begin{table}[H]
 \centering
@@ -24,3 +26,5 @@ Mad -- Rom &        &      & 4.0    \\
 Rom -- Ber &        &      & 4.0 
 \end{tabular}
 \end{table}
+
+The result is a lot different from the results with only two flows. This is because we are no longer minimizing the utility, but maximizing the additional flow. That means that most of used links are at maximum capacity. The flow is no longer spread evenly.

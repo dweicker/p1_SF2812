@@ -1,3 +1,4 @@
+\subsection{Results for stochastic model}
 This section presents the results for the third model (stochastic programming). It sometimes refers to the mathematical model available in the modelisation section.
 
 The first thing to do is to define the different scenarios. Our group chose three different scenarios, called low, medium and high. The low scenario is when all the actual capacities are below the mean by a certain factor $p$. The medium scenario is when the real values are actually the one given. And the high scenario is when the values are above the mean by a factor $p$. So if we reuse the notation defined above :
@@ -18,7 +19,7 @@ $$p_{s} = \left\lbrace \begin{array}{c}
 With those scenarios and a chosen factor of $p=0.1$, we get the following expected utility : 
 $$\sum_{s=1}^3 p_s\: maxUtility_s = 0.8615$$
 
-It is a little bit over the utility obtained when we have certainty over the capacities. It is to be expected. Having complete information will yield better results. We also present below the utilities for each scenario :
+The result is a little bit over the utility obtained when we have certainty over the capacities. It is to be expected. Having complete information will yield better results. We also present below the utilities for each scenario :
 $$ 
 \begin{tabular}{|c|c|c|c|}
 \hline 
@@ -28,7 +29,7 @@ $maxUtility_s$ & 0.952 & 0.857 & 0.779 \\
 \hline 
 \end{tabular} $$
 
-We can see that, the better the scenario, the better the utility. That is quite intuitive. We can also note that if $s=2$ (the capacities are the same as in the deterministic model), then it is possible to route the traffic to find the optimal value found with that model.
+We can see that, the better the scenario, the better the utility. That is quite intuitive. We can also note that if $s=2$ (the capacities are the same as in the deterministic model), then it is possible to route the traffic to find the optimal value found with the deterministic model.
 
 Let us finally look at the proposed traffic. The 40 Gbit/s-flow is given in the table below. In our model, this corresponds to the variables $x_{i,j}$.
 \begin{center}

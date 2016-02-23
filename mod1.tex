@@ -1,5 +1,5 @@
 \newpage
-
+\section{Problem description}
 The telecommunication company Nett provides capacity between cites in Europe. The cities are Stockholm, Berlin, London, Warsaw, Paris, Madrid and Rome. Some of the cities are connected in which traffic can be sent in both directions. The connections and the maximum traffic which can be sent between the cites respectively can be seen in Figure 1.
 
 Nett wishes to provide 50 Gbit/s between Stockholm and Rome at the same time they provide 40 Gbit/s between London and Warsaw. They need help in routing the traffic because of the capacity limitations. Also, they would like to investigate if there is any slack in the network, potential to adding another traffic route and how to handle fluctuations in capacity.
@@ -102,7 +102,7 @@ $$\sum\limits_{k =1}^2 x_{i,j,k} + \sum\limits_{k =1}^2 x_{j,i,k} \leq c_{i,j} \
 $$
 \text{where $c_{i,j}$ is the maximum capacity in arc $(i,j)$.}$$
 
-Finally, we define the objective function as the utility in a link. As stated before, utility is defined as the strain on any link in the network and we wish to minimize the maximum of this. Hence, we introduce the variable $maxUtility$ and put this into our objective function. We also set $maxUtility$ to less or equal to one since the traffic cannot exceed the capacity. A value of $1$ is the highest value utility can take and means that the entire capacity in a link is used.
+Finally, we define the objective function as the utility in a link. As stated before, utility is defined as the strain on any link in the network and we wish to minimize the maximum of this. Hence, we introduce the variable $maxUtility$ and put this into our objective function. We also set $maxUtility$ to less or equal to 1 since the traffic cannot exceed the capacity. A value of $1$ is the highest value utility can take and means that the entire capacity in a link is used.
 
 Taking all of the information into consideration, we can formulate an optimization problem mathematically.
 
