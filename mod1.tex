@@ -1,3 +1,5 @@
+\newpage
+
 The telecommunication company Nett provides capacity between cites in Europe. The cities are Stockholm, Berlin, London, Warsaw, Paris, Madrid and Rome. Some of the cities are connected in which traffic can be sent in both directions. The connections and the maximum traffic which can be sent between the cites respectively can be seen in Figure 1.
 
 Nett wishes to provide 50 Gbit/s between Stockholm and Rome at the same time they provide 40 Gbit/s between London and Warsaw. They need help in routing the traffic because of the capacity limitations. Also, they would like to investigate if there is any slack in the network, potential to adding another traffic route and how to handle fluctuations in capacity.
@@ -44,15 +46,36 @@ To solve this we treat the cities and links as a network and the traffic as a fl
 We start by introduction the set $I$ :
 $$I = \{ Sto,Lon,Ber,War,Par,Rom,Mad\}$$
 
-The set $I$ make up for the network's node and an arc between node $i$ and $j$ is denoted as ($i$,$j$). The flows from Stockholm and London can be sent in the same link in either direction. However, the two flows must be treated independently. That being said, the 50Gbit/s that comes in from Stockholm is the same 50Gbit/s that arrives at Rome. We must keep track of the flows which is why we introduce another index k. The flow from Stockholm to Rome is $k=1$ and the flow from London to Warsaw is $k=2$.
+The set $I$ make up for the network's nodes and an arc between node $i$ and $j$ is denoted as ($i$,$j$). The flows from Stockholm and London can be sent in the same link in either direction. However, the two flows must be treated separately. That being said, the 50Gbit/s that comes in from Stockholm is the same 50Gbit/s that arrives at Rome. We must keep track of the flows which is why we introduce another index k. The flow from Stockholm to Rome is denoted as $k=1$ and the flow from London to Warsaw is $k=2$.
 
 For each arc in the network, there will be a corresponding variable $x_{i,j,k}$ which denotes the flow from node $i$ to $j$ of flow $k$. Solving for the variable $x$ will provide the strategy for how to send the traffic between the cites. Though, there are two constraints which must be taken into account. 
 
 The first constraint deals with conservation of flow, i.e. the flow into a node is equal the flow out.
-$$\sum\limits_{j \in I} x_{i,j,k} - \sum\limits_{j \in I} x_{j,i,k} = b_{i}$$
+$$\sum\limits_{j \in I} x_{i,j,1} - \sum\limits_{j \in I} x_{j,i,1} = a_{i} \qquad \text{for } \forall \: i \in I$$
 
-$$
-\text{where } b_{i} = 
+$$\sum\limits_{j \in I} x_{i,j,2} - \sum\limits_{j \in I} x_{j,i,2} = b_{i} \qquad \text{for } \forall \: i \in I$$
+
+ $$a_{i}= 
+ \begin{bmatrix}
+  a_{Sto}\\
+  a_{Ber}\\
+  a_{War}\\
+  a_{Lon}\\
+  a_{Par}\\
+  a_{Mad}\\
+  a_{Rom}
+ \end{bmatrix} =
+ \begin{bmatrix}
+  50\\
+  0\\
+  0\\
+  0\\
+  0\\
+  0\\
+  -50
+ \end{bmatrix}
+ \text{ and }
+ b_{i}= 
  \begin{bmatrix}
   b_{Sto}\\
   b_{Ber}\\
@@ -63,72 +86,34 @@ $$
   b_{Rom}
  \end{bmatrix} =
  \begin{bmatrix}
-  50\\
+  0\\
   0\\
   -40\\
   40\\
   0\\
   0\\
-  -50
- \end{bmatrix}
-$$
+  0
+ \end{bmatrix}$$
 
 
 The other constraint is that both types of traffic, in either direction, must not exceed the capacity in each link. If there is no direct connections between two cities, the capacity is zero and no traffic can be sent in this arc.
-$$\sum\limits_{k =1}^2 x_{i,j,k} + \sum\limits_{k =1}^2 x_{j,i,k} \leq c_{i,j}\\$$
+$$\sum\limits_{k =1}^2 x_{i,j,k} + \sum\limits_{k =1}^2 x_{j,i,k} \leq c_{i,j} \qquad \text{for } \forall \: i,j \in I\\$$
 
 $$
-\text{where $c_{i,j}$ is the maximum capacity in arc (i,j)}$$
+\text{where $c_{i,j}$ is the maximum capacity in arc $(i,j)$.}$$
 
-Finally, we define the objective function as the utility in a link.
+Finally, we define the objective function as the utility in a link. As stated before, utility is defined as the strain on any link in the network and we wish to minimize the maximum of this. Hence, we introduce the variable $maxUtility$ and put this into our objective function. We also set $maxUtility$ to less or equal to one since the traffic cannot exceed the capacity. A value of $1$ is the highest value utility can take and means that the entire capacity in a link is used.
 
-$$\frac{\sum\limits_{k =1}^2 x_{i,j,k} + \sum\limits_{k =1}^2 x_{j,i,k}}{c_{i,j}}$$
-
-Taking all the above into consideration, the mathematical formulation of the network flow optimization problem becomes:
+Taking all of the information into consideration, we can formulate an optimization problem mathematically.
 
 $$
-\begin{tabular}{r c l}
-		min & $\frac{\sum\limits_{k =1}^2 x_{i,j,k} + \sum\limits_{k =1}^2 x_{j,i,k}}{c_{i,j}}$\\
-		s.t. & $\sum\limits_{j \in I} x_{i,j,k} - \sum\limits_{j \in I} x_{j,i,k} = b_{i}$\\
-		& $\sum\limits_{k =1}^2 x_{i,j,k} + \sum\limits_{k =1}^2 x_{j,i,k} \leq c_{i,j}$\\
-		& $x_{i,j,k} \geq 0\quad \forall \: i,j \in I$
+\begin{tabular}{c c l}
+		$\underset{x,maxUtility}{\text{minimize}}$ & $maxUtility$ &\\
+		subject to & $\sum\limits_{j \in I} x_{i,j,1} - \sum\limits_{j \in I} x_{j,i,1} = a_{i}$ & $\forall \: i \in I$\\
+		& $\sum\limits_{j \in I} x_{i,j,2} - \sum\limits_{j \in I} x_{j,i,2} = b_{i}$ & $\forall \: i \in I$\\
+		& $\sum\limits_{k =1}^2 x_{i,j,k} + \sum\limits_{k =1}^2 x_{j,i,k} \leq maxUtility*c_{i,j}$ & $\forall \: i,j \in I$\\
+		& $maxUtility \leq 1$\\
+		& $x_{i,j,k} \geq 0$ & for $k=1,2 \text{ and }\forall \: i,j \in I$
 	\end{tabular}
 $$
 
-\subsection{Result}
-\begin{center}
-\begin{tikzpicture}[->,shorten >=1pt,auto,node distance=6cm,
-                    main node/.style={rectangle,draw,font=\sffamily\Large\bfseries}]
-  \node[main node] (1) {Stockholm};
-  \node[main node] (2) [below of=1] {Berlin};
-  \node[main node] (3) [below right of=2] {Warsaw};
-  \node[main node] (4) [below left of=2] {Paris};
-  \node[main node] (5) [above left of=4] {London};
-  \node[main node] (6) [below right of=4] {Rome};
-  \node[main node] (7) [below left of=4] {Madrid};
-
-  \path[every node/.style={font=\sffamily\small}]
-    (1) edge [bend right=20] node[blue] {1.0} (5)
-    	edge [bend right=20] node[blue] {12.0} (4)
-     	edge [bend right=25] node[blue] {20.6} (2)
-    	edge [bend left=20] node[blue] {16.4} (3)
-    	edge [bend left=40] node[red] {9.3} (3)
-    (2) edge [bend right=25] node[red] {0.9} (1)
-    	edge [bend right=25] node[blue] {3.0} (4)
-        edge [bend right=20] node[blue] {2.1} (3)
-    	edge [bend left=20] node[red] {15.0} (3)
-    	edge node[blue] {15.4} (6)
-    (3) edge [bend right=25] node[blue] {18.6} (6)
-    (4) edge [bend right=25] node[red] {15.9} (2)
-    	edge [bend right=20] node[blue] {16.0} (6)
-    	edge [bend left=20] node[red] {0.3} (6)
-    	edge node[red] {0.9} (7)
-    (5) edge [bend right=10] node[red] {8.4} (1)
-    	edge [bend left=20] node[red] {17.0} (4)
-    	edge [bend right=20] node[blue] {1.0} (4)
-		edge [bend right=20] node[red] {14.6} (7)
-	(6) edge [bend right=25] node[red] {0.3} (3)
-    (7) edge [bend right=85] node[red] {15.4} (3);
-  
-\end{tikzpicture}
-\end{center}
