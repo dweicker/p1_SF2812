@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014) (preloaded format=pdflatex 2014.10.4)  23 FEB 2016 12:48
+This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014) (preloaded format=pdflatex 2014.10.4)  23 FEB 2016 14:22
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1375,31 +1375,31 @@ ame{table.1}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.2 
+l.4 
     ]) (./res3.tex [10pdfTeX warning (ext4): destination with the same identifi
 er (name{table.2}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.29 \end{tabular} $$
-                     ]) [11] [12]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 128.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 128.
+l.20 $$\sum_{s=1}^3 p_s\: maxUtility_s = 0.8615$$
+                                                 ]) [11] [12]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 125.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 125.
  (./main.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 128.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 128.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 125.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 125.
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: 413681A7B571C0BC4BB9316037617D1C;773.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 128.
+(rerunfilecheck)             Checksum: C7522507F73691AAA2633F5C160EA5B6;746.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 125.
  ) 
 Here is how much of TeX's memory you used:
- 22129 strings out of 493117
- 396913 string characters out of 6135433
+ 22125 strings out of 493117
+ 396832 string characters out of 6135433
  499697 words of memory out of 5000000
- 25052 multiletter control sequences out of 15000+600000
+ 25049 multiletter control sequences out of 15000+600000
  66553 words of font info for 65 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 55i,13n,72p,939b,875s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 55i,13n,72p,939b,873s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2014/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}{/usr/local/
 texlive/2014/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}{/usr/local/texlive/2014/t
 exmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}{/usr/local/texlive/2014/texmf-dist/
@@ -1416,10 +1416,10 @@ lic/lm/lmr8.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/lm/lmri1
 r/local/texlive/2014/texmf-dist/fonts/type1/public/lm/lmssbx10.pfb></usr/local/
 texlive/2014/texmf-dist/fonts/type1/public/lm/lmsy10.pfb></usr/local/texlive/20
 14/texmf-dist/fonts/type1/public/lm/lmsy8.pfb>
-Output written on main.pdf (12 pages, 250694 bytes).
+Output written on main.pdf (12 pages, 252791 bytes).
 PDF statistics:
- 186 PDF objects out of 1000 (max. 8388607)
- 157 compressed objects within 2 object streams
- 28 named destinations out of 1000 (max. 500000)
- 117 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 182 PDF objects out of 1000 (max. 8388607)
+ 153 compressed objects within 2 object streams
+ 27 named destinations out of 1000 (max. 500000)
+ 109 words of extra memory for PDF output out of 10000 (max. 10000000)
 
